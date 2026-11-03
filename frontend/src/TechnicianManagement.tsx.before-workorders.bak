@@ -1,0 +1,472 @@
+import { useState, type FormEvent } from 'react'
+import {
+  UsersRound, UserPlus, Search, Pencil, UserX,
+  RefreshCw, LogOut, ShieldCheck, X
+} from 'lucide-react'
+import './TechnicianManagement.css'
+
+const API = 'http://127.0.0.1:8000'
+
+type Technician = {
+  id: number
+  full_name: string
+  email: string
+  phone: string | null
+  employee_code: string
+  specialization: string
+  shift: string
+  availability: string
+  is_active: boolean
+  notes?: string | null
+}
+
+type Draft = {
+  full_name: string
+  email: string
+  password: string
+  employee_code: string
+  specialization: string
+  phone: string
+  shift: string
+  availability: string
+  notes: string
+}
+
+const empty: Draft = {
+  full_name: '', email: '', password: '',
+  employee_code: '', specialization: '',
+  phone: '', shift: 'morning',
+  availability: 'available', notes: ''
+}
+
+export default function TechnicianManagement() {
+  const [token, setToken] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [people, setPeople] = useState<Technician[]>([])
+  const [admin, setAdmin] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
+  const [search, setSearch] = useState('')
+  const [formOpen, setFormOpen] = useState(false)
+  const [editing, setEditing] = useState<number | null>(null)
+  const [form, setForm] = useState<Draft>(empty)
+
+  async function api(
+    path: string,
+    method = 'GET',
+    body?: unknown,
+    access = token
+  ) {
+    const headers: Record<string, string> = {}
+    if (access) headers.Authorization = `Bearer ${access}`
+    if (body !== undefined) headers['Content-Type'] = 'application/json'
+
+    const response = await fetch(`${API}${path}`, {
+      method, headers,
+      body: body === undefined ? undefined : JSON.stringify(body)
+    })
+    const data = await response.json().catch(() => null)
+
+    if (!response.ok) {
+      throw new Error(
+        typeof data?.detail === 'string'
+          ? data.detail
+          : `Request failed (${response.status})`
+      )
+    }
+    return data
+  }
+
+  async function refresh(access = token) {
+    const list = await api('/api/technicians', 'GET', undefined, access)
+    setPeople(list)
+
+    const check = await fetch(`${API}/api/auth/admin-check`, {
+      headers: { Authorization: `Bearer ${access}` }
+    })
+    setAdmin(check.ok)
+  }
+
+  async function login(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setBusy(true)
+    setError('')
+    try {
+      const session = await api('/api/auth/login', 'POST', {
+        email: email.trim(), password
+      }, '')
+      setPassword('')
+      await refresh(session.access_token)
+      setToken(session.access_token)
+      setMessage('Signed in successfully.')
+    } catch (err) {
+      setToken('')
+      setError(err instanceof Error ? err.message : 'Login failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function logout() {
+    try {
+      await api('/api/auth/logout', 'POST')
+    } catch {
+      // Clear the local session even if the server is unavailable.
+    }
+    setToken('')
+    setPeople([])
+    setAdmin(false)
+    setFormOpen(false)
+    setPassword('')
+    setMessage('')
+    setError('')
+  }
+
+  function create() {
+    setEditing(null)
+    setForm({ ...empty })
+    setError('')
+    setFormOpen(true)
+  }
+
+  function edit(person: Technician) {
+    setEditing(person.id)
+    setForm({
+      full_name: person.full_name,
+      email: person.email,
+      password: '',
+      employee_code: person.employee_code,
+      specialization: person.specialization,
+      phone: person.phone ?? '',
+      shift: person.shift,
+      availability: person.availability,
+      notes: person.notes ?? ''
+    })
+    setError('')
+    setFormOpen(true)
+  }
+
+  function change(key: keyof Draft, value: string) {
+    setForm(previous => ({ ...previous, [key]: value }))
+  }
+
+  async function save(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setBusy(true)
+    setError('')
+    setMessage('')
+    try {
+      if (editing === null) {
+        await api('/api/technicians', 'POST', {
+          full_name: form.full_name,
+          email: form.email,
+          password: form.password,
+          employee_code: form.employee_code,
+          specialization: form.specialization,
+          phone: form.phone || null,
+          shift: form.shift,
+          availability: form.availability
+        })
+      } else {
+        await api(`/api/technicians/${editing}`, 'PATCH', {
+          full_name: form.full_name,
+          phone: form.phone || null,
+          specialization: form.specialization,
+          shift: form.shift,
+          availability: form.availability,
+          notes: form.notes || null
+        })
+      }
+
+      setFormOpen(false)
+      setForm({ ...empty })
+      await refresh()
+      setMessage(editing === null
+        ? 'Technician account created.'
+        : 'Technician profile updated.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Save failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function deactivate(person: Technician) {
+    if (!window.confirm(
+      `Deactivate ${person.full_name}? Their login sessions will be revoked.`
+    )) return
+
+    setBusy(true)
+    setError('')
+    try {
+      await api(`/api/technicians/${person.id}/deactivate`, 'POST')
+      await refresh()
+      setMessage(`${person.full_name} has been deactivated.`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Action failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const filtered = people.filter(person =>
+    `${person.full_name} ${person.employee_code} ${person.specialization} ${person.email}`
+      .toLowerCase().includes(search.toLowerCase())
+  )
+  const active = people.filter(person => person.is_active)
+  const available = active.filter(person => person.availability === 'available').length
+  const busyCount = active.filter(person => person.availability === 'busy').length
+  const onLeave = active.filter(person => person.availability === 'on_leave').length
+
+  return (
+    <div className="tm-page">
+      <div className="tm-heading">
+        <div>
+          <div className="tm-kicker">AEROMIND / PERSONNEL OPERATIONS</div>
+          <h2>Technician Management</h2>
+          <p>Manage individual technician accounts, assignments readiness and staff records.</p>
+        </div>
+        {token && (
+          <button className="tm-secondary" onClick={logout}>
+            <LogOut size={16} /> Sign Out
+          </button>
+        )}
+      </div>
+
+      {error && <div className="tm-alert tm-error">{error}</div>}
+      {message && <div className="tm-alert tm-success">{message}</div>}
+
+      {!token ? (
+        <div className="tm-login">
+          <div className="tm-login-icon"><ShieldCheck size={29} /></div>
+          <h3>Staff Administration Login</h3>
+          <p>Sign in using your existing AeroMind admin account. No Swagger token needed.</p>
+          <form onSubmit={login} className="tm-form">
+            <label>
+              Email address
+              <input type="email" value={email} required
+                autoComplete="username"
+                placeholder="admin@example.com"
+                onChange={event => setEmail(event.target.value)} />
+            </label>
+            <label>
+              Password
+              <input type="password" value={password} required
+                autoComplete="current-password"
+                placeholder="Enter your password"
+                onChange={event => setPassword(event.target.value)} />
+            </label>
+            <button className="tm-primary" disabled={busy}>
+              {busy ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+          <small>Admin accounts can manage staff. Supervisors can view the directory.</small>
+        </div>
+      ) : (
+        <>
+          <div className="tm-stats">
+            {[
+              { label: 'Total Technicians', value: people.length },
+              { label: 'Available', value: available },
+              { label: 'Busy', value: busyCount },
+              { label: 'On Leave', value: onLeave }
+            ].map(item => (
+              <div className="tm-stat" key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+
+          <div className="tm-panel">
+            <div className="tm-toolbar">
+              <div>
+                <h3><UsersRound size={21} /> Staff Directory</h3>
+                <p>{people.length} registered technician accounts</p>
+              </div>
+              <div className="tm-actions">
+                <button className="tm-secondary" disabled={busy}
+                  onClick={() => {
+                    setError('')
+                    refresh().catch(err => setError(err.message))
+                  }}>
+                  <RefreshCw size={16} /> Refresh
+                </button>
+                {admin && (
+                  <button className="tm-primary" onClick={create}>
+                    <UserPlus size={17} /> Add Technician
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="tm-search">
+              <Search size={18} />
+              <input placeholder="Search name, employee ID, specialization..."
+                value={search}
+                onChange={event => setSearch(event.target.value)} />
+            </div>
+
+            <div className="tm-table-wrap">
+              <table className="tm-table">
+                <thead>
+                  <tr>
+                    <th>TECHNICIAN</th>
+                    <th>EMPLOYEE ID</th>
+                    <th>SPECIALIZATION</th>
+                    <th>SHIFT</th>
+                    <th>STATUS</th>
+                    {admin && <th>ACTIONS</th>}
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map(person => (
+                    <tr key={person.id}>
+                      <td>
+                        <div className="tm-person">
+                          <span className="tm-avatar">
+                            {person.full_name.charAt(0).toUpperCase()}
+                          </span>
+                          <span>
+                            <strong>{person.full_name}</strong>
+                            <small>{person.email}</small>
+                          </span>
+                        </div>
+                      </td>
+                      <td>{person.employee_code}</td>
+                      <td>{person.specialization}</td>
+                      <td className="tm-capitalize">{person.shift}</td>
+                      <td>
+                        <span className={`tm-status ${
+                          !person.is_active ? 'inactive' : person.availability
+                        }`}>
+                          {person.is_active
+                            ? person.availability.replace('_', ' ')
+                            : 'Inactive'}
+                        </span>
+                      </td>
+                      {admin && (
+                        <td>
+                          <div className="tm-row-actions">
+                            <button title="Edit technician"
+                              onClick={() => edit(person)}>
+                              <Pencil size={17} />
+                            </button>
+                            {person.is_active && (
+                              <button title="Deactivate technician"
+                                disabled={busy}
+                                onClick={() => deactivate(person)}>
+                                <UserX size={17} />
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {filtered.length === 0 && (
+                <div className="tm-empty">
+                  {people.length === 0
+                    ? 'No technicians yet. Add your first technician.'
+                    : 'No technicians match your search.'}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {admin && formOpen && (
+            <div className="tm-overlay" role="presentation">
+              <div className="tm-editor" role="dialog"
+                aria-modal="true" aria-label="Technician editor">
+                <div className="tm-editor-header">
+                  <div>
+                    <div className="tm-kicker">STAFF ACCOUNT</div>
+                    <h3>{editing === null ? 'Add Technician' : 'Edit Technician'}</h3>
+                  </div>
+                  <button className="tm-icon-button" title="Close"
+                    onClick={() => setFormOpen(false)}>
+                    <X size={21} />
+                  </button>
+                </div>
+
+                <form className="tm-form" onSubmit={save}>
+                  <div className="tm-form-grid">
+                    <label>Full Name
+                      <input required minLength={2} value={form.full_name}
+                        onChange={e => change('full_name', e.target.value)} />
+                    </label>
+                    <label>Employee ID
+                      <input required minLength={2} value={form.employee_code}
+                        disabled={editing !== null}
+                        placeholder="TECH-001"
+                        onChange={e => change('employee_code', e.target.value)} />
+                    </label>
+                    <label>Email
+                      <input type="email" required value={form.email}
+                        disabled={editing !== null}
+                        onChange={e => change('email', e.target.value)} />
+                    </label>
+                    <label>Phone
+                      <input value={form.phone}
+                        onChange={e => change('phone', e.target.value)} />
+                    </label>
+                    <label>Specialization
+                      <input required minLength={2} value={form.specialization}
+                        placeholder="Compressor Inspection"
+                        onChange={e => change('specialization', e.target.value)} />
+                    </label>
+                    <label>Shift
+                      <select value={form.shift}
+                        onChange={e => change('shift', e.target.value)}>
+                        <option value="morning">Morning</option>
+                        <option value="evening">Evening</option>
+                        <option value="night">Night</option>
+                        <option value="rotating">Rotating</option>
+                        <option value="unassigned">Unassigned</option>
+                      </select>
+                    </label>
+                    <label>Availability
+                      <select value={form.availability}
+                        onChange={e => change('availability', e.target.value)}>
+                        <option value="available">Available</option>
+                        <option value="busy">Busy</option>
+                        <option value="on_leave">On Leave</option>
+                      </select>
+                    </label>
+                    {editing === null && (
+                      <label>Temporary Password
+                        <input type="password" required minLength={12}
+                          autoComplete="new-password"
+                          value={form.password}
+                          onChange={e => change('password', e.target.value)} />
+                      </label>
+                    )}
+                  </div>
+                  {editing !== null && (
+                    <label>Notes
+                      <textarea rows={3} value={form.notes}
+                        onChange={e => change('notes', e.target.value)} />
+                    </label>
+                  )}
+                  {error && <div className="tm-alert tm-error">{error}</div>}
+                  <div className="tm-editor-actions">
+                    <button type="button" className="tm-secondary"
+                      onClick={() => setFormOpen(false)}>Cancel</button>
+                    <button className="tm-primary" disabled={busy}>
+                      {busy ? 'Saving...' : editing === null
+                        ? 'Create Account' : 'Save Changes'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}

@@ -1,0 +1,12 @@
+.aero-engine-hero{position:relative;display:grid;grid-template-columns:minmax(250px,.85fr) minmax(360px,1.4fr);min-height:360px;overflow:hidden;border:1px solid #dce8f2;border-radius:18px;background:linear-gradient(120deg,#f9fcff,#eaf3fa);margin:0 0 22px;color:#163953}
+.aero-engine-hero-copy{z-index:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:34px 12px 42px 34px}
+.aero-engine-hero-eyebrow{font-size:10px;font-weight:800;letter-spacing:1.4px;color:#087cb6}
+.aero-engine-hero h2{font-size:clamp(22px,2.5vw,34px);line-height:1.16;max-width:370px;margin:12px 0 10px;letter-spacing:-.6px}
+.aero-engine-hero p{font-size:13px;line-height:1.6;color:#5b7790;max-width:340px;margin:0 0 18px}
+.aero-engine-hero-copy button{display:flex;align-items:center;gap:8px;background:#0b79b5;color:white;border:0;border-radius:9px;padding:12px 15px;font-weight:750;cursor:pointer}
+.aero-engine-hero-copy button:hover{background:#075b8c}
+.aero-engine-hero-hint{display:flex;align-items:center;gap:6px;font-size:11px;color:#7790a3;margin-top:16px}
+.aero-engine-hero-model{min-width:0;min-height:350px;position:relative}
+.aero-engine-hero-disclaimer{position:absolute;bottom:10px;right:18px;font-size:10px;color:#7a91a4}
+.aero-engine-hero-loading{display:grid;place-items:center;height:100%;color:#63849a;font-size:13px}
+@media(max-width:850px){.aero-engine-hero{grid-template-columns:1fr}.aero-engine-hero-copy{padding:25px 24px 0}.aero-engine-hero-model{height:280px;min-height:280px}.aero-engine-hero-disclaimer{bottom:8px}}

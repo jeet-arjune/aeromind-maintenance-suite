@@ -1,0 +1,537 @@
+import { useMemo, useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Html, OrbitControls } from '@react-three/drei'
+import { Maximize2, RotateCcw, Rotate3D, Layers3, Play, Pause, Cable, RadioTower } from 'lucide-react'
+import * as THREE from 'three'
+import './GE90Viewer.css'
+
+type Zone = 'fan' | 'compressor' | 'combustor' | 'turbine'
+
+type Props = {
+  selectedZone: string
+  onSelectZone: (zone: string) => void
+  selectedSensor?: string
+  onSelectSensor?: (sensor: string) => void
+  availableSensors?: { id: string; priority?: string; detectorCount?: number }[]
+}
+
+const sections: { id: Zone; label: string; description: string }[] = [
+  { id: 'fan', label: 'Front fan', description: 'Large bypass fan and olive-green fan casing' },
+  { id: 'compressor', label: 'Compressor', description: 'Illustrative compressor casing and rotating-stage details' },
+  { id: 'combustor', label: 'Combustor', description: 'Illustrative combustion section and external plumbing' },
+  { id: 'turbine', label: 'Turbine / exhaust', description: 'Illustrative turbine casing and exhaust nozzle' },
+]
+
+function highlight(selected: boolean) {
+  return {
+    emissive: selected ? '#1b83c6' : '#000000',
+    emissiveIntensity: selected ? 0.13 : 0,
+  }
+}
+
+function Fan({ selected, exploded, spinning, onSelect }: {
+  selected: boolean
+  exploded: boolean
+  spinning: boolean
+  onSelect: () => void
+}) {
+  const rotor = useRef<THREE.Group>(null)
+  const blade = useMemo(() => {
+    const shape = new THREE.Shape()
+    shape.moveTo(0.24, -0.07)
+    shape.bezierCurveTo(0.55, -0.10, 0.94, -0.34, 1.31, -0.32)
+    shape.lineTo(1.33, -0.07)
+    shape.bezierCurveTo(0.96, 0.11, 0.57, 0.13, 0.24, 0.10)
+    shape.closePath()
+    return new THREE.ExtrudeGeometry(shape, {
+      depth: 0.032, bevelEnabled: true, bevelSize: 0.013,
+      bevelThickness: 0.012, bevelSegments: 2,
+    })
+  }, [])
+
+  useFrame((_, delta) => {
+    if (spinning && rotor.current) rotor.current.rotation.z -= delta * 0.42
+  })
+
+  return (
+    <group position={[0, 0, exploded ? 0.5 : 0]} onClick={event => {
+      event.stopPropagation()
+      onSelect()
+    }}>
+      {/* The hollow olive-green casing lets the front rotor remain visible. */}
+      <mesh position={[0, 0, 1.68]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[1.58, 1.51, 1.56, 80, 1, true]} />
+        <meshStandardMaterial color="#788c51" metalness={0.5} roughness={0.38}
+          side={THREE.DoubleSide} {...highlight(selected)} />
+      </mesh>
+      <mesh position={[0, 0, 1.69]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[1.42, 1.41, 1.5, 80, 1, true]} />
+        <meshStandardMaterial color="#293d44" metalness={0.7} roughness={0.4}
+          side={THREE.DoubleSide} />
+      </mesh>
+      {[0.94, 1.16, 1.39, 1.62, 1.85, 2.08, 2.31, 2.47].map(z => (
+        <mesh key={z} position={[0, 0, z]}>
+          <torusGeometry args={[1.55, 0.025, 10, 96]} />
+          <meshStandardMaterial color="#536c3b" metalness={0.65} roughness={0.33} />
+        </mesh>
+      ))}
+      <mesh position={[0, 0, 2.49]}>
+        <torusGeometry args={[1.52, 0.077, 16, 100]} />
+        <meshStandardMaterial color="#d3d8c6" metalness={0.82} roughness={0.24} />
+      </mesh>
+      {/* Open intake: avoid the opaque disk that hid the fan blades in v1. */}
+      <mesh position={[0, 0, 2.38]}>
+        <torusGeometry args={[1.36, 0.065, 12, 96]} />
+        <meshStandardMaterial color="#182c36" metalness={0.82} roughness={0.32} />
+      </mesh>
+      <group ref={rotor} position={[0, 0, 2.46]}>
+        {Array.from({ length: 22 }, (_, i) => (
+          <mesh key={i} geometry={blade} rotation={[0, 0, (i * Math.PI * 2) / 22]}>
+            <meshStandardMaterial color="#b7c3c9" metalness={0.93} roughness={0.23}
+              side={THREE.DoubleSide} {...highlight(selected)} />
+          </mesh>
+        ))}
+        <mesh position={[0, 0, 0.1]} rotation={[Math.PI / 2, 0, 0]}>
+          <coneGeometry args={[0.31, 0.72, 48]} />
+          <meshStandardMaterial color="#26323c" metalness={0.68} roughness={0.31} />
+        </mesh>
+        <mesh position={[0, 0, 0.015]}>
+          <torusGeometry args={[0.3, 0.04, 12, 48]} />
+          <meshStandardMaterial color="#dce4e7" metalness={0.9} roughness={0.2} />
+        </mesh>
+      </group>
+    </group>
+  )
+}
+
+function Compressor({ selected, exploded, onSelect }: {
+  selected: boolean
+  exploded: boolean
+  onSelect: () => void
+}) {
+  return (
+    <group position={[0, 0, exploded ? 0.16 : 0]} onClick={event => {
+      event.stopPropagation()
+      onSelect()
+    }}>
+      <mesh position={[0, 0, 0.31]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.94, 0.82, 1.26, 64]} />
+        <meshStandardMaterial color="#9ca9af" metalness={0.88} roughness={0.28}
+          {...highlight(selected)} />
+      </mesh>
+      {[0.84, 0.67, 0.50, 0.33, 0.16, -0.01, -0.18].map((z, i) => (
+        <mesh key={z} position={[0, 0, z]}>
+          <torusGeometry args={[0.90 - i * 0.012, 0.044, 10, 72]} />
+          <meshStandardMaterial color={i % 2 ? '#c4cdd2' : '#677b87'}
+            metalness={0.94} roughness={0.22} />
+        </mesh>
+      ))}
+      {Array.from({ length: 10 }, (_, i) => {
+        const a = (i * Math.PI * 2) / 10
+        return (
+          <mesh key={i} position={[Math.cos(a) * 0.87, Math.sin(a) * 0.87, 0.28]}>
+            <sphereGeometry args={[0.067, 12, 12]} />
+            <meshStandardMaterial color="#536b79" metalness={0.85} roughness={0.28} />
+          </mesh>
+        )
+      })}
+    </group>
+  )
+}
+
+function Pipe({ angle, color }: { angle: number; color: string }) {
+  const geometry = useMemo(() => {
+    const r = 0.92
+    const points = [
+      new THREE.Vector3(Math.cos(angle) * r, Math.sin(angle) * r, -0.27),
+      new THREE.Vector3(Math.cos(angle + 0.08) * (r + 0.15), Math.sin(angle + 0.08) * (r + 0.15), -0.67),
+      new THREE.Vector3(Math.cos(angle + 0.13) * (r + 0.10), Math.sin(angle + 0.13) * (r + 0.10), -1.15),
+      new THREE.Vector3(Math.cos(angle + 0.20) * r, Math.sin(angle + 0.20) * r, -1.65),
+    ]
+    return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 36, 0.032, 8, false)
+  }, [angle])
+  return (
+    <mesh geometry={geometry}>
+      <meshStandardMaterial color={color} metalness={0.92} roughness={0.26} />
+    </mesh>
+  )
+}
+
+function Combustor({ selected, exploded, onSelect }: {
+  selected: boolean
+  exploded: boolean
+  onSelect: () => void
+}) {
+  return (
+    <group position={[0, 0, exploded ? -0.22 : 0]} onClick={event => {
+      event.stopPropagation()
+      onSelect()
+    }}>
+      <mesh position={[0, 0, -1.02]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.88, 0.93, 1.25, 64]} />
+        <meshStandardMaterial color="#b9b8b3" metalness={0.85} roughness={0.34}
+          {...highlight(selected)} />
+      </mesh>
+      {[-0.47, -0.77, -1.12, -1.48].map(z => (
+        <mesh key={z} position={[0, 0, z]}>
+          <torusGeometry args={[0.93, 0.06, 12, 72]} />
+          <meshStandardMaterial color="#7b8388" metalness={0.92} roughness={0.25} />
+        </mesh>
+      ))}
+      {Array.from({ length: 9 }, (_, i) => (
+        <Pipe key={i} angle={(i * Math.PI * 2) / 9} color={i % 3 === 0 ? '#b46d4c' : '#a4b0b6'} />
+      ))}
+      {Array.from({ length: 8 }, (_, i) => {
+        const a = (i * Math.PI * 2) / 8
+        return (
+          <mesh key={i} position={[Math.cos(a) * 0.95, Math.sin(a) * 0.95, -0.91]}>
+            <boxGeometry args={[0.16, 0.13, 0.31]} />
+            <meshStandardMaterial color="#667c89" metalness={0.8} roughness={0.36} />
+          </mesh>
+        )
+      })}
+    </group>
+  )
+}
+
+function Turbine({ selected, exploded, onSelect }: {
+  selected: boolean
+  exploded: boolean
+  onSelect: () => void
+}) {
+  return (
+    <group position={[0, 0, exploded ? -0.62 : 0]} onClick={event => {
+      event.stopPropagation()
+      onSelect()
+    }}>
+      <mesh position={[0, 0, -2.03]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.84, 0.76, 1.16, 72]} />
+        <meshStandardMaterial color="#c6cbd0" metalness={0.91} roughness={0.23}
+          {...highlight(selected)} />
+      </mesh>
+      {[-1.54, -1.75, -1.96, -2.17, -2.39, -2.56].map((z, i) => (
+        <mesh key={z} position={[0, 0, z]}>
+          <torusGeometry args={[0.84 - i * 0.016, 0.034, 10, 80]} />
+          <meshStandardMaterial color={i % 2 ? '#8e9da7' : '#e1e4e6'}
+            metalness={0.95} roughness={0.2} />
+        </mesh>
+      ))}
+      <mesh position={[0, 0, -2.83]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.77, 0.53, 0.63, 72, 1, true]} />
+        <meshStandardMaterial color="#b7c1c8" metalness={0.92} roughness={0.25}
+          side={THREE.DoubleSide} />
+      </mesh>
+      <mesh position={[0, 0, -3.18]} rotation={[-Math.PI / 2, 0, 0]}>
+        <coneGeometry args={[0.31, 0.53, 48]} />
+        <meshStandardMaterial color="#697c89" metalness={0.9} roughness={0.29} />
+      </mesh>
+    </group>
+  )
+}
+
+
+// ---- Detailed exterior hardware ------------------------------------------------
+// All routing and sensor positions are illustrative, NOT GE90 installation data.
+// The 21 visual markers correspond to C-MAPSS telemetry channels, not 21
+// verified physical GE90 sensor locations.
+
+type SensorLocation = { channel: number; angle: number; z: number; radius: number; zone: Zone }
+const sensorLocations: SensorLocation[] = Array.from({ length: 21 }, (_, index) => {
+  const channel = index + 1
+  const z = 0.74 - index * 0.157
+  const angle = 0.16 + ((index * 7) % 19) * 0.17
+  const radius = z > -0.35 ? 0.98 : z > -1.52 ? 1.035 : 0.91
+  const zone: Zone = z > 0.42 ? 'compressor' : z > -1.52 ? 'combustor' : 'turbine'
+  return { channel, angle, z, radius, zone }
+})
+
+function sensorNumber(value: string): number | null {
+  const match = value.match(/\d+/)
+  return match ? Number(match[0]) : null
+}
+
+function radial(angle: number, radius: number, z: number) {
+  return new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius, z)
+}
+
+function RoutedTube({ points, radius, color, metalness = 0.55 }: {
+  points: THREE.Vector3[]
+  radius: number
+  color: string
+  metalness?: number
+}) {
+  const geometry = useMemo(() => new THREE.TubeGeometry(
+    new THREE.CatmullRomCurve3(points), Math.max(16, points.length * 5), radius, 7, false
+  ), [points, radius])
+  return (
+    <mesh geometry={geometry} castShadow>
+      <meshStandardMaterial color={color} metalness={metalness} roughness={0.36} />
+    </mesh>
+  )
+}
+
+function ExternalHarnesses() {
+  const harnesses = useMemo(() => Array.from({ length: 11 }, (_, index) => {
+    const angle = 0.18 + index * 0.27
+    const radius = index % 3 === 0 ? 1.16 : 1.105
+    const points = Array.from({ length: 18 }, (_, j) => {
+      const t = j / 17
+      const z = 0.66 - t * 3.04
+      const wave = Math.sin(t * Math.PI * 4 + index * 0.7) * 0.028
+      return radial(angle + wave, radius + Math.sin(t * Math.PI) * 0.055, z)
+    })
+    return { points, color: ['#252f36', '#4c626d', '#aeb8bc', '#283c47', '#7b8789', '#9b563f'][index % 6], radius: index % 3 === 0 ? 0.029 : 0.014 }
+  }), [])
+
+  const clamps = useMemo(() => Array.from({ length: 8 }, (_, i) => {
+    const z = 0.49 - i * 0.4
+    return { z, angle: 0.16 + (i % 2) * 0.05 }
+  }), [])
+
+  return (
+    <group>
+      {/* Multi-strand cable looms running along the exposed core. */}
+      {harnesses.map((h, i) => (
+        <RoutedTube key={`loom-${i}`} points={h.points} radius={h.radius} color={h.color} />
+      ))}
+      {/* Circumferential service lines and mechanical retainers. */}
+      {[-0.04, -0.47, -0.88, -1.31, -1.72, -2.15].map((z, i) => (
+        <mesh key={`retainer-${i}`} position={[0, 0, z]}>
+          <torusGeometry args={[z < -1.6 ? 0.94 : 1.07, 0.018, 8, 96]} />
+          <meshStandardMaterial color={i % 2 ? '#9caeb6' : '#526c79'} metalness={0.88} roughness={0.29} />
+        </mesh>
+      ))}
+      {clamps.map(({ z, angle }, i) => (
+        <group key={`clamp-${i}`} position={radial(angle, 1.17, z)}>
+          <mesh>
+            <boxGeometry args={[0.12, 0.065, 0.12]} />
+            <meshStandardMaterial color="#abb8bf" metalness={0.86} roughness={0.27} />
+          </mesh>
+          <mesh position={[0, 0.055, 0]}>
+            <boxGeometry args={[0.055, 0.025, 0.07]} />
+            <meshStandardMaterial color="#394e5c" metalness={0.65} />
+          </mesh>
+        </group>
+      ))}
+      {/* Flexible pressure lines with curved elbows and visible unions. */}
+      {Array.from({ length: 7 }, (_, i) => {
+        const angle = 0.25 + i * 0.46
+        const points = [
+          radial(angle, 1.04, 0.6),
+          radial(angle + 0.1, 1.24, 0.15),
+          radial(angle + 0.14, 1.23, -0.65),
+          radial(angle + 0.28, 1.16, -1.2),
+          radial(angle + 0.35, 1.0, -1.85),
+        ]
+        return <RoutedTube key={`pressure-${i}`} points={points} radius={0.023 + (i % 3) * 0.005}
+          color={i % 3 === 0 ? '#b06b47' : '#a9b5bd'} metalness={0.92} />
+      })}
+      {/* Small service fittings and bolt heads around the compressor casing. */}
+      {Array.from({ length: 30 }, (_, i) => {
+        const angle = i * Math.PI * 2 / 15
+        const z = i < 15 ? 0.5 : -0.2
+        return (
+          <mesh key={`fastener-${i}`} position={radial(angle, 1.012, z)}>
+            <sphereGeometry args={[0.025, 8, 8]} />
+            <meshStandardMaterial color="#d1dade" metalness={0.93} roughness={0.25} />
+          </mesh>
+        )
+      })}
+    </group>
+  )
+}
+
+function SensorHardware({ item, selected, priority, onSelect }: {
+  item: SensorLocation
+  selected: boolean
+  priority?: string
+  onSelect: () => void
+}) {
+  const mount = useMemo(() => radial(item.angle, item.radius + 0.1, item.z), [item])
+  const orientation = useMemo(() => new THREE.Quaternion().setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0), new THREE.Vector3(Math.cos(item.angle), Math.sin(item.angle), 0)
+  ), [item.angle])
+  const cable = useMemo(() => [
+    radial(item.angle, item.radius + 0.12, item.z),
+    radial(item.angle + 0.09, item.radius + 0.24, item.z - 0.08),
+    radial(item.angle + 0.17, item.radius + 0.21, item.z - 0.22),
+    radial(item.angle + 0.2, item.radius + 0.12, item.z - 0.35),
+  ], [item])
+  const color = selected ? '#21a7e8' : priority === 'P1' ? '#e66e55' : priority === 'P2' ? '#d8a14c' : '#73b8c6'
+  return (
+    <group>
+      <RoutedTube points={cable} radius={0.012} color="#263943" />
+      <group position={mount} quaternion={orientation} onClick={event => {
+        event.stopPropagation()
+        onSelect()
+      }}>
+        {/* Metallic probe body, retaining nut, connector collar and status LED. */}
+        <mesh>
+          <cylinderGeometry args={[0.063, 0.078, 0.17, 12]} />
+          <meshStandardMaterial color="#b7c3ca" metalness={0.9} roughness={0.25} />
+        </mesh>
+        <mesh position={[0, 0.1, 0]}>
+          <cylinderGeometry args={[0.075, 0.075, 0.045, 6]} />
+          <meshStandardMaterial color="#405565" metalness={0.78} roughness={0.3} />
+        </mesh>
+        <mesh position={[0, 0.135, 0]}>
+          <sphereGeometry args={[selected ? 0.062 : 0.042, 12, 10]} />
+          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={selected ? 0.8 : 0.16} />
+        </mesh>
+        {selected && (
+          <>
+            <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0.14, 0]}>
+              <torusGeometry args={[0.13, 0.012, 8, 32]} />
+              <meshBasicMaterial color="#1d99db" />
+            </mesh>
+            <Html position={[0, 0.36, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
+              <span className="ae3d-sensor-label">S-{String(item.channel).padStart(2, '0')}</span>
+            </Html>
+          </>
+        )}
+      </group>
+    </group>
+  )
+}
+
+function Instrumentation({ selectedSensor, onSelectSensor, onSelectZone, availableSensors }: {
+  selectedSensor: string
+  onSelectSensor: (sensor: string) => void
+  onSelectZone: (zone: string) => void
+  availableSensors: { id: string; priority?: string; detectorCount?: number }[]
+}) {
+  return (
+    <group>
+      {sensorLocations.map(item => {
+        const evidence = availableSensors.find(record => sensorNumber(record.id) === item.channel)
+        return (
+          <SensorHardware key={item.channel} item={item}
+            selected={sensorNumber(selectedSensor) === item.channel}
+            priority={evidence?.priority}
+            onSelect={() => {
+              onSelectSensor(evidence?.id ?? `s-${item.channel}`)
+              onSelectZone(item.zone)
+            }}
+          />
+        )
+      })}
+    </group>
+  )
+}
+
+function EngineModel({ selectedZone, onSelectZone, exploded, spinning, showWiring, showSensors,
+  selectedSensor, onSelectSensor, availableSensors }: {
+  selectedZone: string
+  onSelectZone: (zone: string) => void
+  exploded: boolean
+  spinning: boolean
+  showWiring: boolean
+  showSensors: boolean
+  selectedSensor: string
+  onSelectSensor: (sensor: string) => void
+  availableSensors: { id: string; priority?: string; detectorCount?: number }[]
+}) {
+  return (
+    <group rotation={[0, -0.12, 0]} scale={0.87}>
+      <Fan selected={selectedZone === 'fan'} exploded={exploded} spinning={spinning}
+        onSelect={() => onSelectZone('fan')} />
+      <Compressor selected={selectedZone === 'compressor'} exploded={exploded}
+        onSelect={() => onSelectZone('compressor')} />
+      <Combustor selected={selectedZone === 'combustor'} exploded={exploded}
+        onSelect={() => onSelectZone('combustor')} />
+      <Turbine selected={selectedZone === 'turbine'} exploded={exploded}
+        onSelect={() => onSelectZone('turbine')} />
+      {!exploded && showWiring && <ExternalHarnesses />}
+      {!exploded && showSensors && (
+        <Instrumentation selectedSensor={selectedSensor} onSelectSensor={onSelectSensor}
+          onSelectZone={onSelectZone} availableSensors={availableSensors} />
+      )}
+    </group>
+  )
+}
+
+export default function GE90Viewer({ selectedZone, onSelectZone,
+  selectedSensor = '', onSelectSensor = () => {}, availableSensors = [] }: Props) {
+  const [exploded, setExploded] = useState(false)
+  const [spinning, setSpinning] = useState(false)
+  const [showWiring, setShowWiring] = useState(true)
+  const [showSensors, setShowSensors] = useState(true)
+  const [cameraVersion, setCameraVersion] = useState(0)
+  const selected = sections.find(section => section.id === selectedZone) ?? sections[0]
+
+  return (
+    <div className="ae3d-root">
+      <div className="ae3d-toolbar">
+        <span className="ae3d-status"><span className="ae3d-status-dot" /> INTERACTIVE 3D PROTOTYPE</span>
+        <div className="ae3d-actions">
+          <button type="button" onClick={() => setShowWiring(value => !value)}
+            aria-pressed={showWiring} title="Show or hide external wiring harnesses">
+            <Cable size={15} /><span>{showWiring ? 'Hide wiring' : 'Show wiring'}</span>
+          </button>
+          <button type="button" onClick={() => setShowSensors(value => !value)}
+            aria-pressed={showSensors} title="Show or hide sensor channel markers">
+            <RadioTower size={15} /><span>{showSensors ? 'Hide sensors' : 'Show sensors'}</span>
+          </button>
+          <button type="button" onClick={() => setSpinning(value => !value)}
+            aria-pressed={spinning} title="Toggle fan animation">
+            {spinning ? <Pause size={15} /> : <Play size={15} />}
+            <span>{spinning ? 'Pause fan' : 'Spin fan'}</span>
+          </button>
+          <button type="button" onClick={() => setExploded(value => !value)}
+            aria-pressed={exploded} title="Toggle exploded view">
+            <Layers3 size={15} /><span>{exploded ? 'Assemble' : 'Explode'}</span>
+          </button>
+          <button type="button" onClick={() => setCameraVersion(value => value + 1)}
+            title="Reset camera"><RotateCcw size={15} /><span>Reset</span></button>
+        </div>
+      </div>
+
+      <div className="ae3d-canvas" aria-label="Interactive 3D turbofan engine preview">
+        <Canvas key={cameraVersion} camera={{ position: [5.8, 2.9, 7.7], fov: 40, near: 0.1, far: 80 }}
+          dpr={[1, 1.7]} gl={{ antialias: true }}>
+          <color attach="background" args={['#f3f8fc']} />
+          <ambientLight intensity={1.65} />
+          <hemisphereLight args={['#ffffff', '#8ba1b0', 1.7]} />
+          <directionalLight position={[5, 8, 7]} intensity={3.2} />
+          <directionalLight position={[-6, 1, -5]} intensity={1.4} />
+          <gridHelper args={[12, 24, '#d5e4ed', '#e7f0f5']} position={[0, -1.75, 0]} />
+          <EngineModel selectedZone={selectedZone} onSelectZone={onSelectZone}
+            exploded={exploded} spinning={spinning} showWiring={showWiring}
+            showSensors={showSensors} selectedSensor={selectedSensor}
+            onSelectSensor={onSelectSensor} availableSensors={availableSensors} />
+          <OrbitControls makeDefault enableDamping dampingFactor={0.08}
+            enablePan={false} minDistance={4.3} maxDistance={17}
+            minPolarAngle={0.15} maxPolarAngle={Math.PI - 0.15} />
+        </Canvas>
+        <div className="ae3d-hint"><Rotate3D size={15} /> Drag to rotate · Scroll to zoom · Click sensor pins</div>
+      </div>
+
+      <div className="ae3d-footer">
+        <div className="ae3d-zone-list" aria-label="Select engine section">
+          {sections.map(section => (
+            <button key={section.id} type="button"
+              className={selectedZone === section.id ? 'ae3d-zone-active' : ''}
+              onClick={() => onSelectZone(section.id)}
+              aria-pressed={selectedZone === section.id}>
+              {section.label}
+            </button>
+          ))}
+        </div>
+        <div className="ae3d-selection">
+          <Maximize2 size={15} />
+          <span><strong>{selected.label}</strong> — {selected.description}</span>
+        </div>
+        <div className="ae3d-instrumentation-summary">
+          <span><Cable size={13} /> Exterior cable looms and service plumbing</span>
+          <span><RadioTower size={13} /> 21 conceptual telemetry channel markers</span>
+          {exploded && <span className="ae3d-assembly-note">Reassemble to inspect wiring and sensors</span>}
+        </div>
+        <p className="ae3d-note">
+          GE90-inspired illustrative hardware, not GE90 CAD or validated sensor installation.
+          C-MAPSS FD001 supplies simulated turbofan measurements, not GE90 telemetry.
+          The 21 pins visualize data channels, not verified physical sensor locations.
+        </p>
+      </div>
+    </div>
+  )
+}

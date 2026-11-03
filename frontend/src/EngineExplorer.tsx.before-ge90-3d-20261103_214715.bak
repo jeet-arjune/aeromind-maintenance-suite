@@ -1,0 +1,283 @@
+import { useEffect, useState } from 'react'
+import { Activity, AlertTriangle, Cpu } from 'lucide-react'
+import './EngineExplorer.css'
+
+type Evidence = {
+  active: boolean
+  z_score: number
+  threshold: number
+  exceedance_ratio: number
+}
+
+type Sensor = {
+  sensor: string
+  score: number
+  inspection_priority: string
+  current_agreement: number
+  verification: string
+  detectors: Record<string, Evidence>
+}
+
+type Engine = {
+  engine_id: number
+  current_cycle: number
+  predicted_rul: number
+  engine_priority: string
+  sensors: Sensor[]
+}
+
+type ExportData = {
+  engines: Engine[]
+}
+
+type Props = {
+  selectedId: number | null
+  onSelect: (id: number) => void
+}
+
+const zones = [
+  { id: 'fan', name: 'Fan', x: 42, width: 165, detail: 'Air intake and fan section' },
+  { id: 'compressor', name: 'Compressor', x: 210, width: 195, detail: 'Air compression section' },
+  { id: 'combustor', name: 'Combustor', x: 410, width: 175, detail: 'Combustion section' },
+  { id: 'turbine', name: 'Turbine', x: 590, width: 205, detail: 'Turbine and exhaust section' }
+]
+
+const priorityRank = (value: string) =>
+  value === 'P1' ? 0 : value === 'P2' ? 1 : 2
+
+export default function EngineExplorer({ selectedId, onSelect }: Props) {
+  const [data, setData] = useState<ExportData | null>(null)
+  const [error, setError] = useState('')
+  const [zone, setZone] = useState('compressor')
+  const [sensorId, setSensorId] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    fetch('/data/critical_sensor_priorities.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Sensor priority data unavailable')
+        return response.json() as Promise<ExportData>
+      })
+      .then(result => {
+        if (!cancelled) setData(result)
+      })
+      .catch(err => {
+        if (!cancelled) setError(String(err))
+      })
+    return () => { cancelled = true }
+  }, [])
+
+  const engine = data?.engines.find(item => item.engine_id === selectedId)
+    ?? data?.engines[0]
+
+  const sensors = [...(engine?.sensors ?? [])].sort(
+    (a, b) => priorityRank(a.inspection_priority) - priorityRank(b.inspection_priority)
+      || b.score - a.score
+  )
+
+  const sensor = sensors.find(item => item.sensor === sensorId) ?? sensors[0]
+  const selectedZone = zones.find(item => item.id === zone) ?? zones[0]
+
+  return (
+    <section className="ae-explorer">
+      <header className="ae-heading">
+        <div>
+          <span className="ae-kicker">AEROMIND / ENGINE INTELLIGENCE</span>
+          <h2>Interactive Engine Explorer</h2>
+          <p>Explore engine sections and investigate sensor anomaly evidence.</p>
+        </div>
+        <div className="ae-engine-select">
+          <label htmlFor="ae-engine">SELECT ENGINE</label>
+          <select
+            id="ae-engine"
+            value={engine?.engine_id ?? ''}
+            onChange={event => {
+              onSelect(Number(event.target.value))
+              setSensorId('')
+            }}
+          >
+            {data?.engines.map(item => (
+              <option key={item.engine_id} value={item.engine_id}>
+                AC-{String(item.engine_id).padStart(3, '0')}
+              </option>
+            ))}
+          </select>
+        </div>
+      </header>
+
+      {error && <p className="ae-error">{error}</p>}
+      {!data && !error && <p>Loading engine inspection evidence...</p>}
+
+      {engine && (
+        <>
+          <div className="ae-metrics">
+            <div><span>ENGINE</span><strong>AC-{String(engine.engine_id).padStart(3, '0')}</strong></div>
+            <div><span>CURRENT CYCLE</span><strong>{engine.current_cycle}</strong></div>
+            <div><span>PREDICTED RUL</span><strong>{Math.round(engine.predicted_rul)} cycles</strong></div>
+            <div><span>PRIORITY</span><strong>{engine.engine_priority}</strong></div>
+          </div>
+
+          <div className="ae-layout">
+            <div className="ae-visual-card">
+              <div className="ae-card-title">
+                <Cpu size={20} />
+                <h3>Engine Architecture</h3>
+                <span>CONCEPTUAL SCHEMATIC</span>
+              </div>
+
+              <svg
+                className="ae-engine-svg"
+                viewBox="0 0 840 330"
+                role="group"
+                aria-label="Illustrative turbofan engine with four selectable sections"
+              >
+                <defs>
+                  <linearGradient id="ae-metal" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#dceaf5" />
+                    <stop offset="55%" stopColor="#f5f9fc" />
+                    <stop offset="100%" stopColor="#a6c0d5" />
+                  </linearGradient>
+                </defs>
+
+                <path
+                  d="M32 91 Q185 43 400 76 L694 103 L805 136 L805 218 L694 245 L400 272 Q185 296 32 246 Z"
+                  fill="url(#ae-metal)"
+                  stroke="#557e9e"
+                  strokeWidth="3"
+                />
+                <path
+                  d="M42 141 L700 141 L794 158 L794 199 L700 215 L42 215 Z"
+                  fill="#d3e5f1"
+                  stroke="#86a7c1"
+                  strokeWidth="2"
+                />
+                <line x1="30" y1="178" x2="810" y2="178"
+                  stroke="#6e91ac" strokeDasharray="8 7" />
+
+                <circle cx="119" cy="178" r="78" fill="#bdd3e5" stroke="#476e8c" strokeWidth="3" />
+                {Array.from({ length: 12 }, (_, i) => (
+                  <path
+                    key={i}
+                    d="M119 178 Q145 121 125 101 L115 153 Z"
+                    transform={`rotate(${i * 30} 119 178)`}
+                    fill="#648eac"
+                    stroke="#315a79"
+                    strokeWidth="1"
+                  />
+                ))}
+                <circle cx="119" cy="178" r="18" fill="#1b4d72" stroke="#d8eaf5" strokeWidth="4" />
+
+                {[250, 276, 302, 328, 354, 380].map((x, i) => (
+                  <g key={x}>
+                    <path d={`M${x} 119 L${x + 12} 178 L${x} 237`}
+                      stroke="#527c9c" strokeWidth={i < 3 ? 8 : 6}
+                      fill="none" />
+                  </g>
+                ))}
+
+                <path
+                  d="M428 138 Q488 104 562 138 L562 218 Q488 249 428 218 Z"
+                  fill="#b4d3e5"
+                  stroke="#477a9b"
+                  strokeWidth="3"
+                />
+                <path d="M446 159 Q492 138 542 159 L542 196 Q492 216 446 196 Z"
+                  fill="#e6f1f8" stroke="#79a1bc" strokeWidth="2" />
+
+                {[612, 645, 678, 711].map(x => (
+                  <path key={x} d={`M${x} 135 L${x + 13} 178 L${x} 221`}
+                    stroke="#527c9c" strokeWidth="9" fill="none" />
+                ))}
+
+                {zones.map(item => (
+                  <g
+                    key={item.id}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Explore ${item.name}`}
+                    onClick={() => setZone(item.id)}
+                    onKeyDown={event => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault()
+                        setZone(item.id)
+                      }
+                    }}
+                    className="ae-svg-zone"
+                  >
+                    <rect
+                      x={item.x} y="55" width={item.width} height="235" rx="12"
+                      fill={zone === item.id ? '#167fc01a' : 'transparent'}
+                      stroke={zone === item.id ? '#087bc2' : 'transparent'}
+                      strokeWidth="3"
+                      strokeDasharray="7 5"
+                    />
+                    <text x={item.x + item.width / 2} y="316"
+                      textAnchor="middle" fill="#204665"
+                      fontSize="18" fontWeight="700">
+                      {item.name}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+
+              <div className="ae-zone-detail">
+                <div>
+                  <span>SELECTED ENGINE SECTION</span>
+                  <strong>{selectedZone.name}</strong>
+                  <p>{selectedZone.detail}</p>
+                </div>
+                <span className="ae-zone-tag">Illustrative</span>
+              </div>
+
+              <p className="ae-disclaimer">
+                Engine sections are conceptual. NASA C-MAPSS sensor IDs are not
+                verified physical fault locations. Sensor alerts do not confirm
+                component failure.
+              </p>
+            </div>
+
+            <div className="ae-evidence-card">
+              <div className="ae-card-title">
+                <Activity size={20} />
+                <h3>Sensor Inspection</h3>
+              </div>
+
+              <div className="ae-sensor-list">
+                {sensors.map(item => (
+                  <button
+                    key={item.sensor}
+                    className={`ae-sensor-row ${sensor?.sensor === item.sensor ? 'selected' : ''}`}
+                    onClick={() => setSensorId(item.sensor)}
+                  >
+                    <span>{item.sensor.toUpperCase()}</span>
+                    <small>{item.current_agreement} detector(s)</small>
+                    <b>{item.inspection_priority}</b>
+                  </button>
+                ))}
+              </div>
+
+              {sensor && (
+                <div className="ae-sensor-detail">
+                  <h4><AlertTriangle size={17} /> {sensor.sensor.toUpperCase()} — Evidence</h4>
+                  <p>Inspection priority: <strong>{sensor.inspection_priority}</strong></p>
+                  <p>Verification: {sensor.verification.replaceAll('_', ' ')}</p>
+                  {Object.entries(sensor.detectors ?? {}).map(([name, result]) => (
+                    <div className="ae-detector" key={name}>
+                      <span>{name.toUpperCase()}</span>
+                      <span>
+                        {result.z_score.toFixed(2)} / {result.threshold.toFixed(2)}
+                      </span>
+                      <b className={result.active ? 'ae-alert' : 'ae-normal'}>
+                        {result.active ? 'ALERT' : 'NORMAL'}
+                      </b>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </section>
+  )
+}

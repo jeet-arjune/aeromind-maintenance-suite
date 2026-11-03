@@ -1,0 +1,3408 @@
+{
+  "generated_at": "2026-11-01T01:09:50.496562+00:00",
+  "dataset": "NASA C-MAPSS FD001 test fleet",
+  "total_engines": 100,
+  "engines": [
+    {
+      "engine_id": 1,
+      "current_cycle": 31,
+      "predicted_rul_cycles": 121.8,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4311,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.6694,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 1.589,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_20_long_rsu"
+        },
+        "slope": {
+          "score": 1.1251,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 2,
+      "current_cycle": 49,
+      "predicted_rul_cycles": 120.96,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4331,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.756,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 1.7853,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 0.7407,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 3,
+      "current_cycle": 126,
+      "predicted_rul_cycles": 64.02,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4993,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.6758,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 3.2562,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 1.1121,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 4,
+      "current_cycle": 106,
+      "predicted_rul_cycles": 97.83,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4691,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.2813,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_20_rsu"
+        },
+        "long_term": {
+          "score": 2.8021,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_17_long_rsu"
+        },
+        "slope": {
+          "score": 1.108,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 5,
+      "current_cycle": 98,
+      "predicted_rul_cycles": 95.78,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4547,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.808,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 2.9897,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 2.2405,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 6,
+      "current_cycle": 105,
+      "predicted_rul_cycles": 118.49,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4349,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.0243,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 1.9772,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_2_long_rsu"
+        },
+        "slope": {
+          "score": 0.7719,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 7,
+      "current_cycle": 160,
+      "predicted_rul_cycles": 91.17,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4592,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.7108,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_4_rsu"
+        },
+        "long_term": {
+          "score": 3.5949,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 3.8751,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 8,
+      "current_cycle": 166,
+      "predicted_rul_cycles": 86.59,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4722,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.4487,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_12_rsu"
+        },
+        "long_term": {
+          "score": 4.0072,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 1.0446,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 9,
+      "current_cycle": 55,
+      "predicted_rul_cycles": 119.33,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.423,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.8375,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 1.9428,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 1.3072,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 10,
+      "current_cycle": 192,
+      "predicted_rul_cycles": 58.7,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.447,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.9985,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 3.7618,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 2.6072,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 11,
+      "current_cycle": 83,
+      "predicted_rul_cycles": 101.93,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5339,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.5784,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_2_rsu"
+        },
+        "long_term": {
+          "score": 1.9136,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_20_long_rsu"
+        },
+        "slope": {
+          "score": 1.9097,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 12,
+      "current_cycle": 217,
+      "predicted_rul_cycles": 64.62,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4643,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.1214,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 5.0905,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.8448,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 13,
+      "current_cycle": 195,
+      "predicted_rul_cycles": 55.42,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4439,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.5261,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_4_rsu"
+        },
+        "long_term": {
+          "score": 4.232,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 2.2157,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 14,
+      "current_cycle": 46,
+      "predicted_rul_cycles": 118.06,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4868,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.1356,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 2.1202,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 1.8471,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 15,
+      "current_cycle": 76,
+      "predicted_rul_cycles": 102.24,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4152,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.7315,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 2.8207,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 0.7018,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 16,
+      "current_cycle": 113,
+      "predicted_rul_cycles": 80.31,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4402,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.012,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_2_rsu"
+        },
+        "long_term": {
+          "score": 3.502,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.9582,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 17,
+      "current_cycle": 165,
+      "predicted_rul_cycles": 52.16,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4735,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.8929,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 6.5121,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 1.1865,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 18,
+      "current_cycle": 133,
+      "predicted_rul_cycles": 12.28,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4943,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.1119,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 5.5101,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 1.6222,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 19,
+      "current_cycle": 135,
+      "predicted_rul_cycles": 64.86,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4283,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.7593,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 3.6861,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_15_long_rsu"
+        },
+        "slope": {
+          "score": 1.2726,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 20,
+      "current_cycle": 184,
+      "predicted_rul_cycles": 13.24,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 3,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5646,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.9192,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_20_rsu"
+        },
+        "long_term": {
+          "score": 7.424,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 3.4315,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 21,
+      "current_cycle": 148,
+      "predicted_rul_cycles": 55.61,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4645,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.739,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 10.7405,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.0283,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 22,
+      "current_cycle": 39,
+      "predicted_rul_cycles": 121.68,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4208,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.7089,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 1.4199,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_3_long_rsu"
+        },
+        "slope": {
+          "score": 2.0808,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 23,
+      "current_cycle": 130,
+      "predicted_rul_cycles": 120.92,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4133,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.6492,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 2.2128,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_21_long_rsu"
+        },
+        "slope": {
+          "score": 1.2945,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 24,
+      "current_cycle": 186,
+      "predicted_rul_cycles": 18.31,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 3,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5598,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.5086,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_12_rsu"
+        },
+        "long_term": {
+          "score": 19.2298,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 4.8238,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 25,
+      "current_cycle": 48,
+      "predicted_rul_cycles": 121.86,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4179,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.0952,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 2.2973,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_2_long_rsu"
+        },
+        "slope": {
+          "score": 0.8836,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 26,
+      "current_cycle": 76,
+      "predicted_rul_cycles": 101.39,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.446,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.5586,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 2.7159,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.689,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 27,
+      "current_cycle": 140,
+      "predicted_rul_cycles": 91.01,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4368,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.5643,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 3.4462,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 1.3514,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 28,
+      "current_cycle": 158,
+      "predicted_rul_cycles": 82.23,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4278,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.2267,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 4.2184,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 2.6427,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 29,
+      "current_cycle": 171,
+      "predicted_rul_cycles": 79.22,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4539,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.3095,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 4.5597,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 2.2754,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 30,
+      "current_cycle": 143,
+      "predicted_rul_cycles": 75.33,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4643,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.1305,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 3.106,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 1.7509,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 31,
+      "current_cycle": 196,
+      "predicted_rul_cycles": 12.17,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5528,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.0133,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_11_rsu"
+        },
+        "long_term": {
+          "score": 8.8916,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 2.2714,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 32,
+      "current_cycle": 145,
+      "predicted_rul_cycles": 53.08,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4577,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.2621,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 8.1658,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.8442,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 33,
+      "current_cycle": 50,
+      "predicted_rul_cycles": 121.33,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4762,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 3.1888,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 2.6954,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_3_long_rsu"
+        },
+        "slope": {
+          "score": 0.9396,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 34,
+      "current_cycle": 203,
+      "predicted_rul_cycles": 10.56,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 3,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5816,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.4939,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 9.3937,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 3.7777,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 35,
+      "current_cycle": 198,
+      "predicted_rul_cycles": 7.5,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5781,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.4011,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_8_rsu"
+        },
+        "long_term": {
+          "score": 6.0823,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 2.205,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 36,
+      "current_cycle": 126,
+      "predicted_rul_cycles": 26.89,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5291,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.9566,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 4.0867,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_15_long_rsu"
+        },
+        "slope": {
+          "score": 1.6532,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 37,
+      "current_cycle": 121,
+      "predicted_rul_cycles": 28.18,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.545,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.5642,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 5.4753,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 1.4292,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 38,
+      "current_cycle": 125,
+      "predicted_rul_cycles": 73.58,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5268,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.5642,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 8.9319,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 3.1093,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 39,
+      "current_cycle": 37,
+      "predicted_rul_cycles": 121.62,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4311,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.6788,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 1.9805,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_20_long_rsu"
+        },
+        "slope": {
+          "score": 1.4193,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 40,
+      "current_cycle": 133,
+      "predicted_rul_cycles": 42.26,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5574,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.7147,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 3.3332,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_21_long_rsu"
+        },
+        "slope": {
+          "score": 2.7747,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 41,
+      "current_cycle": 123,
+      "predicted_rul_cycles": 24.67,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5329,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.3158,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 5.6562,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.3365,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 42,
+      "current_cycle": 156,
+      "predicted_rul_cycles": 8.74,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5722,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.8432,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 8.0831,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 2.0192,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 43,
+      "current_cycle": 172,
+      "predicted_rul_cycles": 58.82,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4892,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.1222,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 4.1907,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 1.4331,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 44,
+      "current_cycle": 54,
+      "predicted_rul_cycles": 117.08,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4532,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.2687,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_4_rsu"
+        },
+        "long_term": {
+          "score": 2.4184,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 1.0732,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 45,
+      "current_cycle": 152,
+      "predicted_rul_cycles": 103.22,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4994,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.5636,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_12_rsu"
+        },
+        "long_term": {
+          "score": 3.0761,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 1.4048,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 46,
+      "current_cycle": 146,
+      "predicted_rul_cycles": 48.41,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5176,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.2356,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 3.7176,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 0.9134,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 47,
+      "current_cycle": 73,
+      "predicted_rul_cycles": 119.75,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.483,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.8839,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_4_rsu"
+        },
+        "long_term": {
+          "score": 2.2795,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 3.3717,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 48,
+      "current_cycle": 78,
+      "predicted_rul_cycles": 114.0,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4213,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.028,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_11_rsu"
+        },
+        "long_term": {
+          "score": 2.9149,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.5957,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 49,
+      "current_cycle": 303,
+      "predicted_rul_cycles": 11.92,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5338,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.7757,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 8.035,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.3558,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 50,
+      "current_cycle": 74,
+      "predicted_rul_cycles": 73.38,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4291,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.3427,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 2.7798,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_15_long_rsu"
+        },
+        "slope": {
+          "score": 1.9104,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 51,
+      "current_cycle": 144,
+      "predicted_rul_cycles": 115.17,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4564,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.7829,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 2.3198,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 2.3411,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 52,
+      "current_cycle": 189,
+      "predicted_rul_cycles": 31.6,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 4,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5303,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 4.1676,
+          "threshold": 3.4099,
+          "anomaly": true,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 16.9305,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 6.0688,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 53,
+      "current_cycle": 164,
+      "predicted_rul_cycles": 24.08,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5379,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.3821,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 13.7773,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.719,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 54,
+      "current_cycle": 121,
+      "predicted_rul_cycles": 107.24,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4293,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.9238,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 2.2933,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.2338,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 55,
+      "current_cycle": 113,
+      "predicted_rul_cycles": 116.45,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4092,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.4058,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 1.9335,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.3072,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 56,
+      "current_cycle": 136,
+      "predicted_rul_cycles": 13.58,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5436,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.1299,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 4.592,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 1.4973,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 57,
+      "current_cycle": 160,
+      "predicted_rul_cycles": 81.21,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4702,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.9534,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 3.2585,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 1.451,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 58,
+      "current_cycle": 176,
+      "predicted_rul_cycles": 44.11,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5268,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.6569,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_8_rsu"
+        },
+        "long_term": {
+          "score": 5.3985,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_8_long_rsu"
+        },
+        "slope": {
+          "score": 1.2863,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 59,
+      "current_cycle": 94,
+      "predicted_rul_cycles": 104.37,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4502,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.4846,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 2.0687,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 2.4272,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 60,
+      "current_cycle": 147,
+      "predicted_rul_cycles": 100.18,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4268,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.0049,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_4_rsu"
+        },
+        "long_term": {
+          "score": 2.0423,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_15_long_rsu"
+        },
+        "slope": {
+          "score": 0.8358,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 61,
+      "current_cycle": 159,
+      "predicted_rul_cycles": 20.99,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5362,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.9512,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 5.5259,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.2658,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 62,
+      "current_cycle": 232,
+      "predicted_rul_cycles": 43.59,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4999,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.3747,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 9.3292,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.8572,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 63,
+      "current_cycle": 155,
+      "predicted_rul_cycles": 62.61,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4986,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.1961,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_2_rsu"
+        },
+        "long_term": {
+          "score": 3.0816,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.5716,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 64,
+      "current_cycle": 168,
+      "predicted_rul_cycles": 26.16,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5047,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.6285,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 4.853,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_8_long_rsu"
+        },
+        "slope": {
+          "score": 1.1523,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 65,
+      "current_cycle": 71,
+      "predicted_rul_cycles": 116.21,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.465,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.5162,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 1.698,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.108,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 66,
+      "current_cycle": 147,
+      "predicted_rul_cycles": 22.51,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 4,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.563,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 3.5746,
+          "threshold": 3.4099,
+          "anomaly": true,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 16.8919,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 4.6023,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 67,
+      "current_cycle": 71,
+      "predicted_rul_cycles": 121.67,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4549,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.8489,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 3.8641,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.3865,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 68,
+      "current_cycle": 187,
+      "predicted_rul_cycles": 12.73,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5574,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.3835,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 7.0378,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 1.7247,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 69,
+      "current_cycle": 54,
+      "predicted_rul_cycles": 121.84,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4331,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.6393,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 2.3517,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 1.2162,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 70,
+      "current_cycle": 152,
+      "predicted_rul_cycles": 73.47,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4528,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.1584,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 2.5075,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.5066,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 71,
+      "current_cycle": 68,
+      "predicted_rul_cycles": 92.39,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4546,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.8585,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 2.5117,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 1.1865,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 72,
+      "current_cycle": 131,
+      "predicted_rul_cycles": 38.98,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4503,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.3467,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_11_rsu"
+        },
+        "long_term": {
+          "score": 4.3778,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.9838,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 73,
+      "current_cycle": 112,
+      "predicted_rul_cycles": 85.87,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4234,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.9701,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 2.2975,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_3_long_rsu"
+        },
+        "slope": {
+          "score": 1.3795,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 74,
+      "current_cycle": 137,
+      "predicted_rul_cycles": 117.57,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4595,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.4442,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 3.0943,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 1.6654,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 75,
+      "current_cycle": 88,
+      "predicted_rul_cycles": 99.18,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4445,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.4176,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_14_rsu"
+        },
+        "long_term": {
+          "score": 2.8876,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 2.0938,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 76,
+      "current_cycle": 205,
+      "predicted_rul_cycles": 12.37,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 3,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5734,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.0847,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 13.4083,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 3.4094,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 77,
+      "current_cycle": 162,
+      "predicted_rul_cycles": 32.37,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5327,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.2692,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_12_rsu"
+        },
+        "long_term": {
+          "score": 6.2773,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_8_long_rsu"
+        },
+        "slope": {
+          "score": 1.842,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 78,
+      "current_cycle": 72,
+      "predicted_rul_cycles": 119.83,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4667,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.4686,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 2.7865,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_21_long_rsu"
+        },
+        "slope": {
+          "score": 2.0217,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 79,
+      "current_cycle": 101,
+      "predicted_rul_cycles": 107.32,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4318,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.832,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_11_rsu"
+        },
+        "long_term": {
+          "score": 3.0652,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_8_long_rsu"
+        },
+        "slope": {
+          "score": 1.3993,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 80,
+      "current_cycle": 133,
+      "predicted_rul_cycles": 100.53,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4542,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.2307,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 3.3948,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 0.955,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 81,
+      "current_cycle": 213,
+      "predicted_rul_cycles": 11.31,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5645,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.7829,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 7.8684,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 2.9655,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 82,
+      "current_cycle": 162,
+      "predicted_rul_cycles": 6.12,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5642,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.207,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 8.3559,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 3.0652,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 83,
+      "current_cycle": 73,
+      "predicted_rul_cycles": 121.7,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4211,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.9293,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_11_rsu"
+        },
+        "long_term": {
+          "score": 1.977,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_3_long_rsu"
+        },
+        "slope": {
+          "score": 0.9483,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 84,
+      "current_cycle": 172,
+      "predicted_rul_cycles": 64.84,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5162,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.3655,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_13_rsu"
+        },
+        "long_term": {
+          "score": 4.3843,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_13_long_rsu"
+        },
+        "slope": {
+          "score": 1.6229,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_4_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 85,
+      "current_cycle": 34,
+      "predicted_rul_cycles": 121.55,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4394,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.728,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_11_rsu"
+        },
+        "long_term": {
+          "score": 2.5075,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 2.3353,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 86,
+      "current_cycle": 110,
+      "predicted_rul_cycles": 109.77,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4473,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.0547,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 3.5484,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.1938,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 87,
+      "current_cycle": 56,
+      "predicted_rul_cycles": 121.55,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4311,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.9805,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 2.4385,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_21_long_rsu"
+        },
+        "slope": {
+          "score": 0.8754,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 88,
+      "current_cycle": 68,
+      "predicted_rul_cycles": 99.61,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.481,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.1841,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_21_rsu"
+        },
+        "long_term": {
+          "score": 2.0109,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_21_long_rsu"
+        },
+        "slope": {
+          "score": 2.374,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 89,
+      "current_cycle": 177,
+      "predicted_rul_cycles": 80.52,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4274,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.1993,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 3.1758,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 1.2998,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 90,
+      "current_cycle": 146,
+      "predicted_rul_cycles": 40.03,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 3,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5687,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 1.9379,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 7.9787,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_9_long_rsu"
+        },
+        "slope": {
+          "score": 3.3738,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 91,
+      "current_cycle": 234,
+      "predicted_rul_cycles": 19.16,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5345,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.8646,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_12_rsu"
+        },
+        "long_term": {
+          "score": 4.3408,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_11_long_rsu"
+        },
+        "slope": {
+          "score": 1.2809,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 92,
+      "current_cycle": 150,
+      "predicted_rul_cycles": 21.74,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5411,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.9598,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_7_rsu"
+        },
+        "long_term": {
+          "score": 5.6793,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_7_long_rsu"
+        },
+        "slope": {
+          "score": 2.8493,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 93,
+      "current_cycle": 244,
+      "predicted_rul_cycles": 51.92,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.523,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.2765,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 5.6587,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 0.8487,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_11_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 94,
+      "current_cycle": 133,
+      "predicted_rul_cycles": 72.15,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 2,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5302,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 2.9851,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_15_rsu"
+        },
+        "long_term": {
+          "score": 4.3201,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_15_long_rsu"
+        },
+        "slope": {
+          "score": 1.9994,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 95,
+      "current_cycle": 89,
+      "predicted_rul_cycles": 121.47,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4408,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.7829,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_17_rsu"
+        },
+        "long_term": {
+          "score": 1.9869,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_17_long_rsu"
+        },
+        "slope": {
+          "score": 1.8873,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_9_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 96,
+      "current_cycle": 97,
+      "predicted_rul_cycles": 104.16,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4483,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.5553,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 1.745,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_3_long_rsu"
+        },
+        "slope": {
+          "score": 1.1365,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 97,
+      "current_cycle": 134,
+      "predicted_rul_cycles": 78.49,
+      "maintenance_priority": "UNDER OBSERVATION",
+      "priority_reason": "Reduced remaining life or anomalous sensor behavior",
+      "anomaly_count": 1,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4756,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 3.0224,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_20_rsu"
+        },
+        "long_term": {
+          "score": 3.4317,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_20_long_rsu"
+        },
+        "slope": {
+          "score": 1.3842,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 98,
+      "current_cycle": 121,
+      "predicted_rul_cycles": 71.46,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4806,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 2.1646,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_3_rsu"
+        },
+        "long_term": {
+          "score": 2.8891,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_4_long_rsu"
+        },
+        "slope": {
+          "score": 1.4042,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 99,
+      "current_cycle": 97,
+      "predicted_rul_cycles": 115.64,
+      "maintenance_priority": "HEALTHY",
+      "priority_reason": "No detected anomalies and remaining life above 60 cycles",
+      "anomaly_count": 0,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.4403,
+          "threshold": 0.4824,
+          "anomaly": false
+        },
+        "short_term": {
+          "score": 1.1517,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_12_rsu"
+        },
+        "long_term": {
+          "score": 1.7128,
+          "threshold": 3.3077,
+          "anomaly": false,
+          "top_feature": "s_12_long_rsu"
+        },
+        "slope": {
+          "score": 1.7329,
+          "threshold": 3.2063,
+          "anomaly": false,
+          "top_feature": "s_12_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    },
+    {
+      "engine_id": 100,
+      "current_cycle": 198,
+      "predicted_rul_cycles": 20.74,
+      "maintenance_priority": "CRITICAL",
+      "priority_reason": "Predicted remaining life is 30 cycles or less",
+      "anomaly_count": 3,
+      "detectors": {
+        "isolation_forest": {
+          "score": 0.5472,
+          "threshold": 0.4824,
+          "anomaly": true
+        },
+        "short_term": {
+          "score": 3.2927,
+          "threshold": 3.4099,
+          "anomaly": false,
+          "top_feature": "s_9_rsu"
+        },
+        "long_term": {
+          "score": 23.6418,
+          "threshold": 3.3077,
+          "anomaly": true,
+          "top_feature": "s_14_long_rsu"
+        },
+        "slope": {
+          "score": 3.5143,
+          "threshold": 3.2063,
+          "anomaly": true,
+          "top_feature": "s_14_slope"
+        }
+      },
+      "model": "AeroGuard AI V4 prototype"
+    }
+  ],
+  "errors": []
+}

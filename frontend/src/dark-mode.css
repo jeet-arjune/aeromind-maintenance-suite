@@ -1,0 +1,118 @@
+/* AeroMind 2.0 — dark theme */
+
+.aero-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: calc(100% - 26px);
+  margin: 4px 13px 10px;
+  padding: 12px 17px;
+  border: 1px solid rgba(112, 157, 207, .3);
+  border-radius: 12px;
+  background: rgba(88, 151, 214, .12);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  position: relative;
+  z-index: 5;
+  transition: background .2s, border-color .2s;
+}
+
+.aero-theme-toggle:hover {
+  background: rgba(88, 151, 214, .22);
+}
+
+:root[data-aero-theme="dark"] {
+  --aero-dark-bg: #0b1423;
+  --aero-dark-surface: #16263b;
+  --aero-dark-raised: #1e3149;
+  --aero-dark-border: #30465f;
+  --aero-dark-text: #edf4ff;
+  --aero-dark-muted: #a8bad1;
+  background: var(--aero-dark-bg);
+  color-scheme: dark;
+}
+
+:root[data-aero-theme="dark"] body,
+:root[data-aero-theme="dark"] #root,
+:root[data-aero-theme="dark"] .aeromind-app {
+  background: var(--aero-dark-bg) !important;
+  color: var(--aero-dark-text);
+}
+
+:root[data-aero-theme="dark"] .aero-sidebar {
+  background: linear-gradient(180deg, #101d30, #0b1729) !important;
+  border-color: var(--aero-dark-border) !important;
+  color: var(--aero-dark-text);
+}
+
+:root[data-aero-theme="dark"] .aero-nav-item {
+  color: #b9cce4;
+}
+
+:root[data-aero-theme="dark"] .aero-nav-item.active {
+  background: linear-gradient(135deg, #1463bf, #17417e) !important;
+  color: #ffffff !important;
+}
+
+:root[data-aero-theme="dark"] .aero-nav-item:not(.active):hover {
+  background: #213752 !important;
+}
+
+:root[data-aero-theme="dark"] .sidebar-aviation-art {
+  background: linear-gradient(180deg, transparent, #14263b) !important;
+}
+
+:root[data-aero-theme="dark"] :is(
+  .aero-main,
+  .aero-content,
+  .aero-dashboard,
+  .aero-dashboard-grid,
+  .dashboard-content
+) {
+  background-color: var(--aero-dark-bg) !important;
+  color: var(--aero-dark-text);
+}
+
+/* Common dashboard surfaces */
+:root[data-aero-theme="dark"] .aeromind-app :is(
+  [class*="card"],
+  [class*="panel"],
+  [class*="tile"],
+  [class*="hero"],
+  [class*="summary"],
+  [class*="inspection"]
+) {
+  background-color: var(--aero-dark-surface) !important;
+  border-color: var(--aero-dark-border) !important;
+  color: var(--aero-dark-text);
+}
+
+:root[data-aero-theme="dark"] .aeromind-app :is(
+  h1, h2, h3, h4, h5, h6
+) {
+  color: var(--aero-dark-text) !important;
+}
+
+:root[data-aero-theme="dark"] .aeromind-app :is(
+  input, select, textarea
+) {
+  background: var(--aero-dark-raised);
+  color: var(--aero-dark-text);
+  border-color: var(--aero-dark-border);
+}
+
+:root[data-aero-theme="dark"] .aero-theme-toggle {
+  color: #d8e8ff;
+  background: #1e3652;
+  border-color: #3b6086;
+}
+
+:root[data-aero-theme="dark"] .recharts-cartesian-axis-tick-value,
+:root[data-aero-theme="dark"] .recharts-text {
+  fill: #a8bad1;
+}
+
+:root[data-aero-theme="dark"] .recharts-cartesian-grid line {
+  stroke: #30465f;
+}

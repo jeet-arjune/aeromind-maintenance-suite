@@ -1,0 +1,206 @@
+import { useEffect, useState } from 'react'
+import { Activity, AlertTriangle, Cpu } from 'lucide-react'
+import ImportedTurbofanViewer from './components/engine3d/ImportedTurbofanViewer'
+import './EngineExplorer.css'
+
+type Evidence = {
+  active: boolean
+  z_score: number
+  threshold: number
+  exceedance_ratio: number
+}
+
+type Sensor = {
+  sensor: string
+  score: number
+  inspection_priority: string
+  current_agreement: number
+  verification: string
+  detectors: Record<string, Evidence>
+}
+
+type Engine = {
+  engine_id: number
+  current_cycle: number
+  predicted_rul: number
+  engine_priority: string
+  sensors: Sensor[]
+}
+
+type ExportData = {
+  engines: Engine[]
+}
+
+type Props = {
+  selectedId: number | null
+  onSelect: (id: number) => void
+}
+
+const zones = [
+  { id: 'fan', name: 'Fan', x: 42, width: 165, detail: 'Air intake and fan section' },
+  { id: 'compressor', name: 'Compressor', x: 210, width: 195, detail: 'Air compression section' },
+  { id: 'combustor', name: 'Combustor', x: 410, width: 175, detail: 'Combustion section' },
+  { id: 'turbine', name: 'Turbine', x: 590, width: 205, detail: 'Turbine and exhaust section' }
+]
+
+const priorityRank = (value: string) =>
+  value === 'P1' ? 0 : value === 'P2' ? 1 : 2
+
+export default function EngineExplorer({ selectedId, onSelect }: Props) {
+  const [data, setData] = useState<ExportData | null>(null)
+  const [error, setError] = useState('')
+  const [zone, setZone] = useState('compressor')
+  const [sensorId, setSensorId] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    fetch('/data/critical_sensor_priorities.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Sensor priority data unavailable')
+        return response.json() as Promise<ExportData>
+      })
+      .then(result => {
+        if (!cancelled) setData(result)
+      })
+      .catch(err => {
+        if (!cancelled) setError(String(err))
+      })
+    return () => { cancelled = true }
+  }, [])
+
+  const engine = data?.engines.find(item => item.engine_id === selectedId)
+    ?? data?.engines[0]
+
+  const sensors = [...(engine?.sensors ?? [])].sort(
+    (a, b) => priorityRank(a.inspection_priority) - priorityRank(b.inspection_priority)
+      || b.score - a.score
+  )
+
+  const sensor = sensors.find(item => item.sensor === sensorId)
+    ?? (!sensorId ? sensors[0] : undefined)
+  const selectedZone = zones.find(item => item.id === zone) ?? zones[0]
+
+  return (
+    <section className="ae-explorer">
+      <header className="ae-heading">
+        <div>
+          <span className="ae-kicker">AEROMIND / ENGINE INTELLIGENCE</span>
+          <h2>Interactive Engine Explorer</h2>
+          <p>Explore engine sections and investigate sensor anomaly evidence.</p>
+        </div>
+        <div className="ae-engine-select">
+          <label htmlFor="ae-engine">SELECT ENGINE</label>
+          <select
+            id="ae-engine"
+            value={engine?.engine_id ?? ''}
+            onChange={event => {
+              onSelect(Number(event.target.value))
+              setSensorId('')
+            }}
+          >
+            {data?.engines.map(item => (
+              <option key={item.engine_id} value={item.engine_id}>
+                AC-{String(item.engine_id).padStart(3, '0')}
+              </option>
+            ))}
+          </select>
+        </div>
+      </header>
+
+      {error && <p className="ae-error">{error}</p>}
+      {!data && !error && <p>Loading engine inspection evidence...</p>}
+
+      {engine && (
+        <>
+          <div className="ae-metrics">
+            <div><span>ENGINE</span><strong>AC-{String(engine.engine_id).padStart(3, '0')}</strong></div>
+            <div><span>CURRENT CYCLE</span><strong>{engine.current_cycle}</strong></div>
+            <div><span>PREDICTED RUL</span><strong>{Math.round(engine.predicted_rul)} cycles</strong></div>
+            <div><span>PRIORITY</span><strong>{engine.engine_priority}</strong></div>
+          </div>
+
+          <div className="ae-layout">
+            <div className="ae-visual-card">
+              <div className="ae-card-title">
+                <Cpu size={20} />
+                <h3>Engine Architecture</h3>
+                <span>INTERACTIVE 3D PREVIEW</span>
+              </div>
+
+                            <ImportedTurbofanViewer selectedZone={zone} onSelectZone={setZone}
+                    selectedSensor={sensor?.sensor ?? sensorId}
+                    onSelectSensor={setSensorId}
+                    availableSensors={sensors.map(item => ({
+                      id: item.sensor,
+                      priority: item.inspection_priority,
+                      detectorCount: item.current_agreement
+                    }))}
+                  />
+
+              <div className="ae-zone-detail">
+                <div>
+                  <span>SELECTED ENGINE SECTION</span>
+                  <strong>{selectedZone.name}</strong>
+                  <p>{selectedZone.detail}</p>
+                </div>
+                <span className="ae-zone-tag">Illustrative</span>
+              </div>
+
+              <p className="ae-disclaimer">
+                Engine sections are conceptual. NASA C-MAPSS sensor IDs are not
+                verified physical fault locations. Sensor alerts do not confirm
+                component failure.
+              </p>
+            </div>
+
+            <div className="ae-evidence-card">
+              <div className="ae-card-title">
+                <Activity size={20} />
+                <h3>Sensor Inspection</h3>
+              </div>
+
+              <div className="ae-sensor-list">
+                {sensors.map(item => (
+                  <button
+                    key={item.sensor}
+                    className={`ae-sensor-row ${sensor?.sensor === item.sensor ? 'selected' : ''}`}
+                    onClick={() => setSensorId(item.sensor)}
+                  >
+                    <span>{item.sensor.toUpperCase()}</span>
+                    <small>{item.current_agreement} detector(s)</small>
+                    <b>{item.inspection_priority}</b>
+                  </button>
+                ))}
+              </div>
+
+              {!sensor && sensorId && (
+                <div className="ae-unranked-channel" role="status">
+                  <strong>{sensorId.toUpperCase()}</strong> — This channel has no ranked inspection
+                  evidence in the current export. No anomaly status is inferred.
+                </div>
+              )}
+              {sensor && (
+                <div className="ae-sensor-detail">
+                  <h4><AlertTriangle size={17} /> {sensor.sensor.toUpperCase()} — Evidence</h4>
+                  <p>Inspection priority: <strong>{sensor.inspection_priority}</strong></p>
+                  <p>Verification: {sensor.verification.replaceAll('_', ' ')}</p>
+                  {Object.entries(sensor.detectors ?? {}).map(([name, result]) => (
+                    <div className="ae-detector" key={name}>
+                      <span>{name.toUpperCase()}</span>
+                      <span>
+                        {result.z_score.toFixed(2)} / {result.threshold.toFixed(2)}
+                      </span>
+                      <b className={result.active ? 'ae-alert' : 'ae-normal'}>
+                        {result.active ? 'ALERT' : 'NORMAL'}
+                      </b>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </section>
+  )
+}

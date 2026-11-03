@@ -1,0 +1,60 @@
+# Python
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# React / Node
+**/node_modules/
+frontend/dist/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# ML datasets and model files
+data/raw/
+*.zip
+*.pkl
+*.joblib
+*.pt
+*.h5
+
+# Local databases
+*.sqlite3
+*.duckdb
+
+# System files
+.DS_Store
+Thumbs.db
+
+# AeroMind local development backups
+frontend/aeromind_dashboard_approved_backup/
+frontend/src/*.backup.css
+frontend/src/*.backup.tsx
+frontend/src/*.backup.tsx.disabled
+
+# Local credentials and private keys
+*.pem
+*.key
+database/*.db
+database/*.db-wal
+database/*.db-shm
+
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+
+# Local databases and temporary files
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+backups/
+.DS_Store

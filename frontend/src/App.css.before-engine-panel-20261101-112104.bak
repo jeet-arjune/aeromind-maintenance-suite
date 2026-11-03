@@ -1,0 +1,2697 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #0b1533;
+  background: #f5f8ff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.aeromind-app { display: flex; min-height: 100vh; }
+
+.aero-sidebar {
+  width: 226px;
+  min-width: 226px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff 0%, #f9fbff 67%, #e5f0ff 100%);
+  border-right: 1px solid #dfe7f4;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.aero-logo {
+  height: 101px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 19px 25px;
+}
+
+.logo-symbol {
+  color: #0752c9;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1;
+  font-style: italic;
+  transform: skew(-12deg);
+  letter-spacing: -7px;
+  padding-right: 6px;
+}
+
+.aero-logo strong { display: block; font-size: 21px; letter-spacing: -.9px; }
+.aero-logo small { display: block; font-size: 10px; font-weight: 600; margin-top: 5px; }
+
+.aero-nav { padding: 17px 13px; position: relative; z-index: 2; }
+
+.aero-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #13203d;
+  text-align: left;
+  padding: 15px 18px;
+  margin-bottom: 10px;
+  border-radius: 17px;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 50px;
+}
+
+.aero-nav-item.active {
+  color: #fff;
+  background: linear-gradient(135deg, #1257d5, #062e91);
+  box-shadow: 0 8px 18px #0e4cbb20;
+}
+
+.aero-nav-item:not(.active):hover { background: #eaf1ff; }
+
+.sidebar-aviation-art {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 290px;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent 0%, #eaf3ff 52%, #c9def8 100%);
+}
+
+.sidebar-aviation-art > svg {
+  position: absolute;
+  color: #91b8e7;
+  top: 80px;
+  left: 102px;
+  transform: rotate(-18deg);
+  z-index: 2;
+}
+
+.tower-shape {
+  position: absolute;
+  width: 20px;
+  height: 105px;
+  background: #a7c6ee;
+  bottom: 69px;
+  left: 55px;
+  clip-path: polygon(15% 0%, 85% 0%, 70% 100%, 30% 100%);
+}
+
+.tower-shape::before { content: ''; position: absolute; background: #89b2e7; inset: 0; }
+
+.sidebar-hill { position: absolute; width: 360px; height: 110px; border-radius: 50%; }
+.hill-one { background: #d5e5fa; bottom: 18px; left: -130px; transform: rotate(-10deg); }
+.hill-two { background: #b9d3f4; bottom: -36px; left: -70px; transform: rotate(12deg); }
+.hill-three { background: #a7c7ee; bottom: -77px; left: 15px; transform: rotate(-17deg); }
+
+.aero-main { flex: 1; min-width: 0; }
+
+.aero-header {
+  height: 150px;
+  padding: 25px 32px 17px;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(125deg, #f7faff 0%, #e7f1ff 100%);
+}
+
+.aero-header::after {
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 180px;
+  right: 170px;
+  bottom: -128px;
+  background: #d9e8fb80;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+
+.header-copy { position: relative; z-index: 2; }
+
+.header-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #52627f;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.header-kicker > span { width: 4px; height: 18px; background: #175ee1; border-radius: 4px; }
+
+.header-copy h1 { font-size: clamp(22px, 2.1vw, 31px); letter-spacing: -1.2px; margin: 13px 0 8px; }
+.header-copy p { font-size: 13px; font-weight: 500; margin: 0; }
+
+.header-plane {
+  position: absolute;
+  left: 57%;
+  top: 30px;
+  color: #1685d9;
+  transform: rotate(-19deg);
+  z-index: 1;
+}
+
+.header-controls { margin-left: auto; display: flex; align-items: center; gap: 23px; z-index: 3; }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e0e8f5;
+  background: #ffffffc9;
+  border-radius: 30px;
+  padding: 11px 14px;
+  box-shadow: 0 4px 12px #1e59b010;
+  color: #8095b9;
+}
+
+.search-box input { width: 190px; border: 0; outline: 0; background: transparent; font-size: 12px; color: #24365d; }
+.search-box input::placeholder { color: #687b9d; }
+
+.round-icon {
+  border: 0;
+  background: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  color: #0c1741;
+  box-shadow: 0 4px 13px #153f8a10;
+}
+
+.notification-dot { width: 8px; height: 8px; background: #f43d49; border-radius: 50%; position: absolute; top: 8px; right: 9px; border: 1px solid white; }
+
+.user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 20px;
+  background: linear-gradient(135deg, #0d49bd, #061c63);
+}
+
+.aero-content { padding: 0 18px 24px; }
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 16px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  min-height: 128px;
+  padding: 17px 18px;
+  border-radius: 20px;
+  border: 1px solid #ffffff;
+  box-shadow: 0 5px 13px #244c8b12;
+}
+
+.total-card { background: linear-gradient(110deg, #eef5ff, #e5f0ff); }
+.healthy-card { background: linear-gradient(110deg, #eafaf3, #e8f8f2); }
+.risk-card { background: linear-gradient(110deg, #fff7ea, #fff3e5); }
+.critical-card { background: linear-gradient(110deg, #fff0f3, #fce9ed); }
+
+.summary-icon {
+  width: 67px;
+  height: 67px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.total-card .summary-icon { color: #1465e9; background: #dceaff; }
+.healthy-card .summary-icon { color: #08b66b; background: #d2f5e6; }
+.risk-card .summary-icon { color: #f59c0a; background: #ffead0; }
+.critical-card .summary-icon { color: #ff3046; background: #ffdae1; }
+
+.summary-card h3 { margin: 2px 0 5px; font-size: 13px; font-weight: 700; }
+.summary-card strong { font-size: 36px; letter-spacing: -1.5px; line-height: 1.1; }
+.summary-card p { display: flex; align-items: center; gap: 5px; margin: 6px 0 0; font-size: 12px; font-weight: 500; }
+.total-card p { color: #119344; }
+
+.aero-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, .96fr) minmax(300px, .98fr);
+  grid-template-rows: minmax(310px, auto) minmax(260px, auto);
+  gap: 15px;
+}
+
+.aero-panel {
+  background: #fff;
+  border: 1px solid #e6edf8;
+  border-radius: 18px;
+  box-shadow: 0 4px 13px #244c8b0d;
+  padding: 18px 20px;
+  min-width: 0;
+}
+
+.panel-title { display: flex; align-items: center; gap: 10px; min-height: 31px; }
+.panel-title h2 { font-size: 17px; margin: 0; letter-spacing: -.55px; font-weight: 800; white-space: nowrap; }
+.panel-icon { color: #0957df; display: flex; }
+.panel-chevron { color: #d3dff0; margin-left: auto; }
+
+.rul-panel { grid-column: 1; grid-row: 1; }
+.fleet-health-panel { grid-column: 2; grid-row: 1; }
+.maintenance-panel { grid-column: 3; grid-row: 1 / 3; display: flex; flex-direction: column; }
+.insights-panel { grid-column: 1; grid-row: 2; }
+.trend-panel { grid-column: 2; grid-row: 2; }
+
+.chart-headline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 15px 6px 0;
+  color: #52658b;
+  font-size: 11px;
+}
+
+.chart-headline b { color: #0d4ec5; }
+
+.rul-chart { height: 200px; width: 100%; margin-top: 3px; }
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  color: #1d2e51;
+  margin-top: 3px;
+}
+
+.legend-blue { width: 20px; height: 3px; background: #1469f6; border-radius: 3px; }
+.legend-note { color: #9aa9c0; font-size: 9px; }
+
+.donut-layout { display: flex; align-items: center; justify-content: center; gap: 8px; height: 245px; }
+.donut-chart { position: relative; width: 57%; height: 210px; }
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donut-center strong { font-size: 32px; letter-spacing: -1px; }
+.donut-center span { font-size: 12px; font-weight: 600; margin-top: 3px; }
+
+.health-legend { flex: 1; display: flex; flex-direction: column; gap: 21px; }
+.health-legend > div { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.health-legend b { margin-left: auto; font-size: 13px; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+.maintenance-list { display: flex; flex-direction: column; gap: 7px; margin-top: 16px; }
+
+.maintenance-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 68px;
+  border: 1px solid #edf1fa;
+  background: #fff;
+  border-radius: 15px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: 0 3px 9px #1a3e8010;
+}
+
+.maintenance-item:hover, .maintenance-item.selected { background: #f5f9ff; border-color: #cddffa; }
+.maintenance-item > strong { font-size: 12px; white-space: nowrap; }
+.maintenance-item > svg { color: #a7b8d2; flex-shrink: 0; }
+
+.maintenance-tag { padding: 6px 9px; border-radius: 18px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.maintenance-tag.critical { background: #ffe1e5; color: #f02738; }
+.maintenance-tag.risk { background: #fff0d5; color: #d88000; }
+
+.maintenance-rul { display: flex; flex-direction: column; margin-left: auto; font-size: 11px; white-space: nowrap; }
+.maintenance-rul b { font-size: 12px; }
+
+.maintenance-button {
+  margin-top: auto;
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 16px;
+  background: linear-gradient(120deg, #1055d3, #082d95);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.empty-queue { font-size: 12px; color: #8394ae; }
+
+.insight-feature {
+  background: #edf4ff;
+  border: 1px solid #dce9ff;
+  border-radius: 14px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0 12px;
+}
+
+.insight-chip { width: 49px; height: 49px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; background: #e0ebff; color: #125be3; }
+.insight-feature p { margin: 0 0 5px; font-size: 13px; }
+.insight-feature p b { color: #095de9; }
+.insight-feature strong { font-size: 12px; color: #f03240; }
+
+.insight-mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.insight-mini-grid > div { display: flex; align-items: center; gap: 9px; padding: 12px 9px; border-radius: 13px; background: #f8faff; min-height: 75px; }
+.insight-mini-grid svg { flex-shrink: 0; color: #155dec; }
+.insight-mini-grid span { font-size: 10px; line-height: 1.55; }
+.insight-mini-grid b { color: #0e4ac5; }
+
+.breakdown-chart { height: 150px; margin-top: 13px; }
+.trend-legend { display: flex; justify-content: center; gap: 14px; margin-top: 8px; font-size: 10px; font-weight: 600; }
+.trend-disclaimer { text-align: center; font-size: 9px; color: #9aabc3; margin: 11px 0 0; }
+
+.api-error { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; background: #fff0f0; color: #be2734; padding: 12px; border-radius: 9px; font-size: 12px; }
+.aero-footer { font-size: 10px; text-align: center; color: #9caac0; padding: 18px 0 0; }
+
+@media (max-width: 1400px) {
+  .aero-sidebar { width: 200px; min-width: 200px; }
+  .aero-logo { padding-left: 16px; }
+  .aero-dashboard-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  .maintenance-panel { grid-column: 2; grid-row: 2 / 4; }
+  .fleet-health-panel { grid-column: 2; grid-row: 1; }
+  .insights-panel { grid-column: 1; grid-row: 2; }
+  .trend-panel { grid-column: 1; grid-row: 3; }
+  .header-controls { gap: 10px; }
+  .search-box input { width: 130px; }
+}
+
+@media (max-width: 900px) {
+  .aero-sidebar { width: 76px; min-width: 76px; }
+  .aero-logo { padding: 19px 13px; }
+  .aero-logo > div:last-child { display: none; }
+  .aero-nav { padding: 12px 7px; }
+  .aero-nav-item { justify-content: center; padding: 14px; }
+  .aero-nav-item span { display: none; }
+  .sidebar-aviation-art { display: none; }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .header-plane { display: none; }
+  .header-copy h1 { font-size: 22px; }
+  .header-copy p { max-width: 430px; }
+}
+
+@media (max-width: 650px) {
+  .aero-sidebar { display: none; }
+  .aero-header { height: auto; min-height: 145px; padding: 20px; }
+  .header-controls { display: none; }
+  .aero-content { padding: 0 12px 20px; }
+  .summary-grid { gap: 9px; }
+  .summary-card { gap: 9px; padding: 13px; min-height: 112px; }
+  .summary-icon { width: 42px; height: 42px; }
+  .summary-icon svg { width: 23px; }
+  .summary-card h3 { font-size: 11px; }
+  .summary-card strong { font-size: 27px; }
+  .summary-card p { font-size: 10px; }
+  .aero-dashboard-grid { display: flex; flex-direction: column; }
+  .aero-panel { width: 100%; }
+  .panel-title h2 { font-size: 15px; }
+}
+
+/* AeroMind reference layout refinements */
+@media (min-width: 1100px) {
+  .aero-dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(285px, 1fr);
+    grid-template-rows: minmax(310px, auto) minmax(255px, auto);
+    gap: 14px;
+  }
+
+  .rul-panel { grid-column: 1; grid-row: 1; }
+  .fleet-health-panel { grid-column: 2; grid-row: 1; }
+  .maintenance-panel { grid-column: 3; grid-row: 1 / 3; }
+  .insights-panel { grid-column: 1; grid-row: 2; }
+  .trend-panel { grid-column: 2; grid-row: 2; }
+
+  .aero-sidebar {
+    width: 210px;
+    min-width: 210px;
+  }
+
+  .aero-header {
+    height: 136px;
+    padding: 21px 26px 14px;
+  }
+
+  .aero-content {
+    padding: 0 15px 20px;
+  }
+
+  .summary-grid {
+    gap: 13px;
+    margin-bottom: 14px;
+  }
+
+  .summary-card {
+    min-height: 115px;
+    padding: 16px 13px;
+    gap: 11px;
+    align-items: center;
+  }
+
+  .summary-icon {
+    width: 55px;
+    height: 55px;
+  }
+
+  .summary-icon svg {
+    width: 29px;
+    height: 29px;
+  }
+
+  .summary-card h3 {
+    font-size: 12px;
+  }
+
+  .summary-card strong {
+    font-size: 32px;
+  }
+
+  .summary-card p {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .aero-panel {
+    padding: 17px 16px;
+  }
+
+  .panel-title h2 {
+    font-size: 15px;
+  }
+
+  .maintenance-item {
+    padding: 10px 8px;
+    gap: 6px;
+  }
+
+  .maintenance-tag {
+    padding: 5px 7px;
+    font-size: 10px;
+  }
+
+  .maintenance-rul {
+    font-size: 10px;
+  }
+
+  .maintenance-rul b {
+    font-size: 11px;
+  }
+
+  .donut-layout {
+    gap: 4px;
+  }
+
+  .donut-chart {
+    width: 58%;
+  }
+
+  .health-legend > div {
+    font-size: 10px;
+    gap: 5px;
+  }
+
+  .insight-mini-grid > div {
+    padding: 10px 7px;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1320px) {
+  .aero-dashboard-grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, .95fr) minmax(250px, .95fr);
+  }
+
+  .aero-sidebar {
+    width: 185px;
+    min-width: 185px;
+  }
+
+  .aero-nav-item {
+    gap: 12px;
+    padding: 13px 12px;
+    font-size: 12px;
+  }
+
+  .search-box input {
+    width: 105px;
+  }
+
+  .header-controls {
+    gap: 8px;
+  }
+
+  .summary-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .summary-card {
+    padding: 12px 9px;
+    gap: 8px;
+  }
+}
+
+/* Compact desktop layout — closer to AeroMind reference */
+@media (min-width: 1100px) {
+  .aero-header {
+    height: 132px;
+  }
+
+  .summary-card {
+    min-height: 105px;
+    border-radius: 18px;
+  }
+
+  .summary-grid {
+    margin-bottom: 12px;
+  }
+
+  .aero-dashboard-grid {
+    grid-template-rows: 290px 245px;
+    gap: 12px;
+  }
+
+  .aero-panel {
+    padding: 15px 17px;
+  }
+
+  .rul-chart {
+    height: 185px;
+  }
+
+  .chart-headline {
+    margin-top: 9px;
+  }
+
+  .donut-layout {
+    height: 215px;
+  }
+
+  .donut-chart {
+    height: 190px;
+  }
+
+  .insight-feature {
+    padding: 11px;
+    margin: 11px 0 9px;
+  }
+
+  .insight-mini-grid > div {
+    min-height: 65px;
+  }
+
+  .breakdown-chart {
+    height: 125px;
+    margin-top: 8px;
+  }
+
+  .aero-footer {
+    padding-top: 12px;
+  }
+}
+
+/* Reference-matched desktop proportions */
+@media (min-width: 1100px) {
+  .aero-header {
+    height: 118px;
+    padding-top: 17px;
+  }
+
+  .header-copy h1 {
+    margin-top: 8px;
+    margin-bottom: 7px;
+  }
+
+  .summary-grid {
+    margin-bottom: 10px;
+  }
+
+  .summary-card {
+    min-height: 100px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  .aero-dashboard-grid {
+    grid-template-rows: 275px 215px;
+    gap: 10px;
+  }
+
+  .aero-panel {
+    padding: 13px 16px;
+  }
+
+  .rul-chart {
+    height: 158px;
+    margin-top: 0;
+  }
+
+  .chart-headline {
+    margin-top: 7px;
+  }
+
+  .chart-legend {
+    margin-top: 0;
+  }
+
+  .donut-layout {
+    height: 188px;
+  }
+
+  .donut-chart {
+    height: 165px;
+  }
+
+  .insight-feature {
+    padding: 9px 12px;
+    margin: 8px 0;
+  }
+
+  .insight-mini-grid > div {
+    min-height: 58px;
+    padding: 8px;
+  }
+
+  .breakdown-chart {
+    height: 110px;
+    margin-top: 4px;
+  }
+
+  .aero-footer {
+    padding-top: 9px;
+  }
+}
+
+/* ENGINE_INTELLIGENCE_STYLES_V1 */
+.intelligence-page {
+  margin-bottom: 24px;
+}
+
+.intelligence-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 5px 24px;
+}
+
+.intelligence-kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: #1765e9;
+}
+
+.intelligence-toolbar h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 7px 0;
+  color: #102449;
+}
+
+.intelligence-toolbar p {
+  font-size: 12px;
+  color: #8090a8;
+  margin: 0;
+}
+
+.intelligence-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.intelligence-controls select {
+  border: 1px solid #dfe7f2;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff;
+  color: #1c355c;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.intelligence-status {
+  padding: 9px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.intelligence-status.critical {
+  background: #ffe3e8;
+  color: #ed304a;
+}
+
+.intelligence-status.observation {
+  background: #fff0d7;
+  color: #cf7908;
+}
+
+.intelligence-status.healthy {
+  background: #def9ed;
+  color: #129769;
+}
+
+.intelligence-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.intelligence-metrics article {
+  background: #fff;
+  border: 1px solid #e5edf6;
+  border-radius: 17px;
+  padding: 21px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 5px 15px #142e5409;
+  min-width: 0;
+}
+
+.intelligence-metrics article span {
+  font-size: 12px;
+  color: #66768e;
+  font-weight: 650;
+}
+
+.intelligence-metrics article strong {
+  font-size: 32px;
+  letter-spacing: -0.7px;
+  color: #0f234a;
+  line-height: 1.15;
+}
+
+.intelligence-metrics article strong em {
+  font-size: 17px;
+  font-style: normal;
+  color: #8a98aa;
+}
+
+.intelligence-metrics article .evidence-label {
+  font-size: 17px;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.intelligence-metrics article small {
+  font-size: 11px;
+  color: #8796aa;
+}
+
+.intelligence-chart-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.intelligence-chart-card {
+  min-height: 360px;
+}
+
+.intelligence-subheading {
+  font-size: 11px;
+  color: #7d8da5;
+  margin: 10px 0 0;
+}
+
+.intelligence-chart {
+  height: 260px;
+  margin-top: 18px;
+}
+
+.intelligence-wide {
+  grid-column: 1 / -1;
+  min-height: 310px;
+}
+
+.intelligence-chart-short {
+  height: 205px;
+}
+
+.intelligence-chart-note {
+  font-size: 11px;
+  color: #8694aa;
+  margin: 10px 0 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 1150px) {
+  .intelligence-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 750px) {
+  .intelligence-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intelligence-wide {
+    grid-column: auto;
+  }
+
+  .intelligence-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .intelligence-metrics article {
+    padding: 14px;
+  }
+
+  .intelligence-metrics article strong {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intelligence-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .intelligence-controls {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* AEROMIND_RUL_PROFESSIONAL_V2 */
+.rul-panel {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+.rul-panel h2,
+.rul-panel h3 {
+  color: #0b1736 !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.6px !important;
+}
+
+.rul-panel .recharts-cartesian-grid line {
+  stroke: #dce3eb !important;
+  stroke-dasharray: none !important;
+}
+
+.rul-panel .recharts-cartesian-axis line,
+.rul-panel .recharts-cartesian-axis-tick-line {
+  stroke: #64748b !important;
+}
+
+.rul-panel .recharts-cartesian-axis-tick-value {
+  fill: #334155 !important;
+  font-weight: 650 !important;
+  font-size: 12px !important;
+}
+
+.rul-panel .recharts-legend-item-text {
+  color: #172b4d !important;
+  font-weight: 700 !important;
+}
+
+.rul-panel .recharts-tooltip-wrapper {
+  font-weight: 700 !important;
+}
+
+/* ==========================================================
+   AEROMIND PROFESSIONAL OPERATIONS DESIGN — V3
+   Aerospace monitoring aesthetic | CSS-only redesign
+   ========================================================== */
+
+:root {
+  --ops-ink: #142238;
+  --ops-navy: #111e30;
+  --ops-navy-soft: #1b2b41;
+  --ops-blue: #1764b0;
+  --ops-muted: #66778b;
+  --ops-border: #dce3eb;
+  --ops-surface: #ffffff;
+  --ops-workspace: #f2f5f8;
+  --ops-critical: #bd3540;
+  --ops-warning: #ae751d;
+  --ops-healthy: #257b68;
+}
+
+/* Workspace and overall geometry */
+
+body {
+  background: var(--ops-workspace) !important;
+  color: var(--ops-ink);
+}
+
+.aeromind-app {
+  background: var(--ops-workspace) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.aero-main {
+  background: var(--ops-workspace) !important;
+  min-width: 0;
+}
+
+/* Deep navy operational sidebar */
+
+.aero-sidebar {
+  background: var(--ops-navy) !important;
+  border-right: 1px solid #28394d !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.aero-logo {
+  border-bottom: 1px solid #2a3a4e !important;
+  background: transparent !important;
+}
+
+.aero-logo strong {
+  color: #f5f8fc !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.7px !important;
+}
+
+.aero-logo small {
+  color: #9caec2 !important;
+}
+
+.logo-symbol {
+  color: #61a9f0 !important;
+  filter: none !important;
+}
+
+.aero-nav {
+  gap: 5px !important;
+}
+
+.aero-nav-item {
+  border-radius: 6px !important;
+  color: #aebed0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 1px solid transparent !important;
+  font-weight: 600 !important;
+  transition: background 160ms ease, color 160ms ease !important;
+}
+
+.aero-nav-item svg {
+  color: #93a9c0 !important;
+}
+
+.aero-nav-item.active {
+  color: #ffffff !important;
+  background: #253b56 !important;
+  border-color: #395878 !important;
+  box-shadow: inset 3px 0 0 #4c9ae9 !important;
+}
+
+.aero-nav-item.active svg {
+  color: #76baff !important;
+}
+
+.aero-nav-item:not(.active):hover {
+  color: #ffffff !important;
+  background: #1d3048 !important;
+}
+
+.sidebar-aviation-art,
+.sidebar-hill,
+.tower-shape {
+  display: none !important;
+}
+
+/* Remove decorative airplane illustration from header */
+
+.header-plane,
+.aero-header::after {
+  display: none !important;
+}
+
+.aero-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--ops-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.header-kicker {
+  color: var(--ops-blue) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.7px !important;
+}
+
+.header-copy h1 {
+  color: #102039 !important;
+  font-weight: 850 !important;
+  letter-spacing: -1.1px !important;
+}
+
+.header-copy p {
+  color: var(--ops-muted) !important;
+  font-weight: 450 !important;
+}
+
+.search-box {
+  background: #f5f7fa !important;
+  border: 1px solid #d8e0e9 !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+}
+
+.search-box input {
+  background: transparent !important;
+  color: var(--ops-ink) !important;
+}
+
+.round-icon,
+.user-avatar {
+  border-radius: 7px !important;
+  box-shadow: none !important;
+}
+
+.round-icon {
+  background: #f5f7fa !important;
+  border: 1px solid #d8e0e9 !important;
+  color: #243c59 !important;
+}
+
+.user-avatar {
+  background: #243b57 !important;
+  color: white !important;
+}
+
+/* Neutral KPI cards, with risk represented through text */
+
+.summary-grid {
+  gap: 12px !important;
+}
+
+.summary-card,
+.total-card,
+.healthy-card,
+.risk-card,
+.critical-card {
+  background: #ffffff !important;
+  border: 1px solid var(--ops-border) !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+}
+
+.summary-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #617d9b;
+}
+
+.total-card::before {
+  background: #1764b0;
+}
+
+.healthy-card::before {
+  background: #257b68;
+}
+
+.risk-card::before {
+  background: #ae751d;
+}
+
+.critical-card::before {
+  background: #bd3540;
+}
+
+.summary-icon,
+.total-card .summary-icon,
+.healthy-card .summary-icon,
+.risk-card .summary-icon,
+.critical-card .summary-icon {
+  background: #eef2f6 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+.total-card .summary-icon {
+  color: #1764b0 !important;
+}
+
+.healthy-card .summary-icon {
+  color: #257b68 !important;
+}
+
+.risk-card .summary-icon {
+  color: #ae751d !important;
+}
+
+.critical-card .summary-icon {
+  color: #bd3540 !important;
+}
+
+.summary-card h3 {
+  color: #53657a !important;
+  font-weight: 700 !important;
+}
+
+.summary-card strong {
+  color: #142238 !important;
+  font-weight: 850 !important;
+  letter-spacing: -1.5px !important;
+}
+
+.summary-card p,
+.total-card p {
+  color: #69798b !important;
+}
+
+/* Dashboard panels */
+
+.aero-dashboard-grid {
+  gap: 12px !important;
+}
+
+.aero-panel,
+.rul-panel,
+.fleet-health-panel,
+.maintenance-panel,
+.insights-panel,
+.trend-panel {
+  background: #ffffff !important;
+  border: 1px solid var(--ops-border) !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+}
+
+.panel-title h2 {
+  color: #17263c !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.5px !important;
+}
+
+.panel-icon {
+  background: transparent !important;
+  color: #24679f !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.panel-chevron {
+  color: #8191a5 !important;
+}
+
+.chart-headline,
+.chart-headline b {
+  color: #2b4361 !important;
+}
+
+.chart-headline b {
+  font-weight: 800 !important;
+}
+
+.chart-legend,
+.legend-note,
+.trend-disclaimer {
+  color: #76869a !important;
+  font-size: 11px !important;
+}
+
+.legend-blue {
+  background: #1764b0 !important;
+}
+
+/* Strong, technical chart presentation */
+
+.rul-panel .recharts-cartesian-grid line,
+.trend-panel .recharts-cartesian-grid line,
+.intelligence-page .recharts-cartesian-grid line {
+  stroke: #e2e7ee !important;
+  stroke-dasharray: none !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #64748b !important;
+  font-size: 11px !important;
+}
+
+.recharts-cartesian-axis line {
+  stroke: #a7b4c4 !important;
+}
+
+.recharts-default-tooltip {
+  border: 1px solid #d6dfe9 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 8px 22px rgba(17, 30, 48, 0.10) !important;
+}
+
+/* Fleet health and legends */
+
+.donut-center strong {
+  color: #17263c !important;
+  font-weight: 850 !important;
+}
+
+.donut-center span,
+.health-legend > div {
+  color: #5f7187 !important;
+}
+
+.health-legend b {
+  color: #17263c !important;
+  font-weight: 800 !important;
+}
+
+/* Maintenance queue: dense operational rows */
+
+.maintenance-list {
+  gap: 7px !important;
+}
+
+.maintenance-item {
+  background: #f9fafc !important;
+  border: 1px solid #e1e7ee !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+.maintenance-item:hover,
+.maintenance-item.selected {
+  background: #eff4f9 !important;
+  border-color: #a9bfd5 !important;
+  box-shadow: none !important;
+}
+
+.maintenance-item > strong {
+  color: #17263c !important;
+  font-weight: 800 !important;
+}
+
+.maintenance-item > svg {
+  color: #7c8fa4 !important;
+}
+
+.maintenance-tag {
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+
+.maintenance-tag.critical {
+  background: #f7e8e9 !important;
+  color: #a82e39 !important;
+}
+
+.maintenance-tag.risk {
+  background: #f8f0e3 !important;
+  color: #96631a !important;
+}
+
+.maintenance-rul,
+.maintenance-rul b {
+  color: #26394f !important;
+}
+
+.maintenance-button {
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+/* AI insights: remove pastel visual noise */
+
+.insight-feature {
+  background: #f1f5f9 !important;
+  border: 1px solid #dce5ee !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+}
+
+.insight-chip {
+  background: #e3eaf2 !important;
+  color: #1764b0 !important;
+  border-radius: 6px !important;
+}
+
+.insight-feature p {
+  color: #2c4159 !important;
+}
+
+.insight-feature p b {
+  color: #1c5487 !important;
+}
+
+.insight-feature strong {
+  color: #ae3540 !important;
+}
+
+.insight-mini-grid {
+  gap: 8px !important;
+}
+
+.insight-mini-grid > div {
+  background: #f7f9fb !important;
+  border: 1px solid #e4eaf0 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+.insight-mini-grid svg {
+  color: #346b9c !important;
+}
+
+.insight-mini-grid span {
+  color: #53657a !important;
+}
+
+.insight-mini-grid b {
+  color: #1c5487 !important;
+}
+
+/* Engine Intelligence page */
+
+.intelligence-toolbar h2 {
+  color: #142238 !important;
+  font-weight: 850 !important;
+}
+
+.intelligence-kicker {
+  color: #1764b0 !important;
+}
+
+.intelligence-controls select {
+  border-radius: 6px !important;
+  border-color: #d5dee8 !important;
+}
+
+.intelligence-status {
+  border-radius: 4px !important;
+}
+
+.intelligence-status.critical {
+  background: #f7e8e9 !important;
+  color: #a82e39 !important;
+}
+
+.intelligence-status.observation {
+  background: #f8f0e3 !important;
+  color: #96631a !important;
+}
+
+.intelligence-status.healthy {
+  background: #e6f1ed !important;
+  color: #257b68 !important;
+}
+
+.intelligence-metrics article {
+  border-radius: 8px !important;
+  border-color: var(--ops-border) !important;
+  box-shadow: none !important;
+}
+
+.intelligence-metrics article strong {
+  color: #142238 !important;
+  font-weight: 850 !important;
+}
+
+.intelligence-metrics article span {
+  color: #617287 !important;
+}
+
+.intelligence-chart-card {
+  border-radius: 8px !important;
+}
+
+/* Footer and finishing details */
+
+.aero-footer {
+  color: #8a98a8 !important;
+  border-top: 1px solid #e1e7ee !important;
+}
+
+.api-error {
+  border-radius: 6px !important;
+}
+
+@media (max-width: 750px) {
+  .aero-sidebar {
+    background: #111e30 !important;
+  }
+
+  .aero-header {
+    border-radius: 0 !important;
+  }
+
+  .summary-grid {
+    gap: 8px !important;
+  }
+
+  .aero-dashboard-grid {
+    gap: 10px !important;
+  }
+}
+
+/* AEROMIND_FOCUSED_DASHBOARD_V4 */
+
+/* Fleet distribution is already represented by the four KPI cards. */
+.aero-dashboard-grid > .fleet-health-panel,
+.aero-dashboard-grid > .trend-panel {
+  display: none !important;
+}
+
+/* Give the three useful operational panels the full workspace. */
+.aero-dashboard-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) !important;
+  grid-template-rows: auto auto !important;
+  gap: 14px !important;
+  align-items: stretch !important;
+}
+
+.aero-dashboard-grid > .rul-panel {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.aero-dashboard-grid > .insights-panel {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.aero-dashboard-grid > .maintenance-panel {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* More room for the real historical RUL trajectory. */
+.aero-dashboard-grid > .rul-panel .rul-chart {
+  min-height: 245px !important;
+}
+
+/* Keep the maintenance list usable even with many flagged engines. */
+.aero-dashboard-grid > .maintenance-panel .maintenance-list {
+  max-height: 650px !important;
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: #b7c4d3 transparent;
+}
+
+/* Responsive layout for narrower screens. */
+@media (max-width: 1099px) {
+  .aero-dashboard-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
+  }
+
+  .aero-dashboard-grid > .rul-panel,
+  .aero-dashboard-grid > .insights-panel,
+  .aero-dashboard-grid > .maintenance-panel {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    height: auto !important;
+  }
+}
+
+/* AEROMIND_MINIMAL_HEADER_V5 */
+
+/* Remove search, notification bell, and user avatar. */
+.aero-header .header-controls {
+  display: none !important;
+}
+
+/* Keep the header balanced without right-side controls. */
+.aero-header {
+  justify-content: flex-start !important;
+}
+
+.header-copy {
+  max-width: 100% !important;
+}
+
+
+/* AEROMIND_LIVE_RUL_GAUGE_LAYOUT_V1 */
+
+.aero-dashboard-grid {
+  grid-template-rows: auto auto auto !important;
+}
+
+.aero-dashboard-grid > .rul-gauge-panel {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  background: #ffffff;
+  border: 1px solid #dce3eb;
+  border-radius: 9px;
+  padding: 22px 26px;
+  min-width: 0;
+}
+
+.aero-dashboard-grid > .rul-panel {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+}
+
+.aero-dashboard-grid > .insights-panel {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
+}
+
+.aero-dashboard-grid > .maintenance-panel {
+  grid-column: 2 !important;
+  grid-row: 1 / span 3 !important;
+}
+
+.rul-gauge-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rul-gauge-eyebrow {
+  color: #1764b0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.rul-gauge-heading h2 {
+  margin: 8px 0 5px;
+  color: #142238;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.rul-gauge-heading p {
+  margin: 0;
+  color: #66778b;
+  font-size: 12px;
+}
+
+.rul-gauge-priority {
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 6px 9px;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.rul-gauge-visual {
+  width: min(100%, 390px);
+  margin: 0 auto;
+}
+
+.rul-gauge-visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rul-gauge-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e7ee;
+  color: #77869a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+@media (max-width: 1099px) {
+  .aero-dashboard-grid > .rul-gauge-panel,
+  .aero-dashboard-grid > .rul-panel,
+  .aero-dashboard-grid > .insights-panel,
+  .aero-dashboard-grid > .maintenance-panel {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .aero-dashboard-grid > .rul-gauge-panel {
+    padding: 16px;
+  }
+
+  .rul-gauge-heading h2 {
+    font-size: 19px;
+  }
+}
+
+
+/* AEROMIND — CRITICAL SENSOR INTELLIGENCE */
+.aero-dashboard-grid[style*="display: none"] {
+  display: none !important;
+}
+
+.aero-content:has(.sensor-page) > .summary-grid {
+  display: none !important;
+}
+
+.sensor-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: #172b42;
+  padding: 4px 0 28px;
+}
+
+.sensor-page-header,
+.sensor-workspace-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sensor-eyebrow {
+  display: block;
+  color: #607b97;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  margin-bottom: 8px;
+}
+
+.sensor-page-header h2 {
+  margin: 0 0 7px;
+  color: #122a45;
+  font-size: clamp(23px, 2.2vw, 30px);
+  letter-spacing: -.8px;
+  font-weight: 750;
+}
+
+.sensor-page-header p,
+.sensor-workspace-heading p {
+  margin: 0;
+  color: #708399;
+  font-size: 13px;
+}
+
+.sensor-engine-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sensor-engine-picker label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  color: #71859a;
+}
+
+.sensor-engine-picker select {
+  min-width: 160px;
+  padding: 11px 37px 11px 14px;
+  border: 1px solid #d9e3ec;
+  border-radius: 9px;
+  background: #fff;
+  color: #173450;
+  font-weight: 750;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sensor-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sensor-kpi,
+.sensor-workspace {
+  background: #fff;
+  border: 1px solid #e0e7ee;
+  border-radius: 13px;
+  box-shadow: 0 4px 18px rgba(23, 45, 67, .035);
+}
+
+.sensor-kpi {
+  padding: 19px 19px 17px;
+  min-width: 0;
+}
+
+.sensor-kpi-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #60768e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .8px;
+}
+
+.sensor-kpi-label svg {
+  color: #416d91;
+}
+
+.sensor-kpi > strong {
+  display: block;
+  margin: 16px 0 7px;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -.8px;
+  color: #15334f;
+  font-variant-numeric: tabular-nums;
+}
+
+.sensor-kpi > strong small {
+  font-size: 13px;
+  font-weight: 600;
+  color: #71859b;
+  letter-spacing: 0;
+}
+
+.sensor-kpi > span {
+  color: #8796a7;
+  font-size: 11px;
+}
+
+.sensor-workspace {
+  overflow: hidden;
+}
+
+.sensor-workspace-heading {
+  padding: 23px 23px 21px;
+}
+
+.sensor-workspace-heading h3 {
+  margin: 0 0 7px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  color: #17334f;
+}
+
+.sensor-filter-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  background: #f1f5f8;
+  padding: 4px;
+  border-radius: 9px;
+}
+
+.sensor-filter-group button {
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #72869a;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.sensor-filter-group button.active {
+  background: #fff;
+  color: #1d4f76;
+  box-shadow: 0 1px 5px rgba(20, 48, 75, .10);
+}
+
+.sensor-column-head,
+.sensor-row-main {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.5fr) minmax(180px, 1fr) 135px 30px;
+  align-items: center;
+  gap: 16px;
+}
+
+.sensor-column-head {
+  background: #f5f8fa;
+  border-top: 1px solid #e8edf2;
+  border-bottom: 1px solid #e8edf2;
+  padding: 13px 23px;
+  color: #8a9aab;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.sensor-row {
+  border-bottom: 1px solid #edf1f5;
+}
+
+.sensor-row:last-child {
+  border-bottom: 0;
+}
+
+.sensor-row-main {
+  width: 100%;
+  padding: 18px 23px;
+  background: #fff;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  transition: background .15s;
+}
+
+.sensor-row-main:hover {
+  background: #f8fafc;
+}
+
+.sensor-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sensor-rank {
+  width: 25px;
+  flex-shrink: 0;
+  color: #a3b1bf;
+  font-size: 12px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.sensor-identity > div {
+  min-width: 0;
+}
+
+.sensor-identity strong {
+  display: block;
+  color: #1b344d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sensor-identity small {
+  display: block;
+  margin-top: 5px;
+  color: #8a9baa;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.sensor-priority-pill {
+  margin-left: auto;
+  padding: 5px 9px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .4px;
+}
+
+.sensor-priority-pill.p1 {
+  background: #fff0ee;
+  color: #c14d41;
+}
+
+.sensor-priority-pill.p2 {
+  background: #fff5e6;
+  color: #a56b20;
+}
+
+.sensor-priority-pill.p3 {
+  background: #edf4f8;
+  color: #537a98;
+}
+
+.sensor-verification {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #60768b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.sensor-verification svg {
+  flex-shrink: 0;
+  color: #557c98;
+}
+
+.sensor-score strong {
+  display: block;
+  color: #244663;
+  font-size: 16px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 8px;
+}
+
+.sensor-score-track {
+  width: 100%;
+  height: 5px;
+  border-radius: 8px;
+  background: #e9eef2;
+  overflow: hidden;
+}
+
+.sensor-score-track > div {
+  height: 100%;
+  border-radius: inherit;
+  background: #527e9d;
+}
+
+.sensor-p1 .sensor-score-track > div {
+  background: #bf6258;
+}
+
+.sensor-p2 .sensor-score-track > div {
+  background: #c49a57;
+}
+
+.sensor-expand-icon {
+  color: #9aabba;
+  transition: transform .15s;
+}
+
+.sensor-expand-icon.expanded {
+  transform: rotate(90deg);
+}
+
+.sensor-evidence-panel {
+  padding: 18px 23px 22px 62px;
+  background: #f7f9fb;
+  border-top: 1px solid #edf1f5;
+}
+
+.sensor-evidence-intro {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.sensor-evidence-intro strong {
+  color: #1c3c59;
+  font-size: 12px;
+}
+
+.sensor-evidence-intro span {
+  color: #72869a;
+  font-size: 11px;
+}
+
+.sensor-detector-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sensor-detector {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border: 1px solid #e1e9f0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 13px;
+}
+
+.sensor-detector > span {
+  color: #627c93;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sensor-detector strong {
+  font-size: 10px;
+  letter-spacing: .3px;
+}
+
+.sensor-detector strong.triggered {
+  color: #bc5549;
+}
+
+.sensor-detector strong.normal {
+  color: #568474;
+}
+
+.sensor-detector small {
+  color: #8898a8;
+  font-size: 10px;
+}
+
+.sensor-evidence-panel > p {
+  margin: 15px 0 0;
+  color: #647b91;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.sensor-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #7d8fa1;
+  font-size: 11px;
+  line-height: 1.7;
+  padding: 0 3px;
+}
+
+.sensor-disclaimer svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #6686a0;
+}
+
+.sensor-loading,
+.sensor-error,
+.sensor-empty {
+  padding: 30px 22px;
+  color: #6c8094;
+  font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+  .sensor-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sensor-column-head {
+    display: none;
+  }
+  .sensor-row-main {
+    grid-template-columns: minmax(190px, 1fr) minmax(130px, 1fr) 90px 20px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sensor-kpi-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  .sensor-kpi {
+    padding: 14px;
+  }
+  .sensor-kpi > strong {
+    font-size: 23px;
+  }
+  .sensor-workspace-heading {
+    padding: 17px;
+  }
+  .sensor-row-main {
+    grid-template-columns: 1fr auto;
+    padding: 15px;
+  }
+  .sensor-verification,
+  .sensor-score {
+    grid-column: 1 / -1;
+  }
+  .sensor-expand-icon {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .sensor-evidence-panel {
+    padding: 15px;
+  }
+  .sensor-detector-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Engine identification in technician sensor queue */
+.sensor-full-id {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sensor-engine-id {
+  color: #527b9a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .35px;
+}
+
+.sensor-id-divider {
+  color: #b3c0cc;
+  font-weight: 500;
+}
+
+.sensor-full-id > span:last-child {
+  color: #183650;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+
+/* Hide AI Insights dashboard panel */
+.aero-dashboard-grid .insights-panel {
+  display: none !important;
+}
+
+
+/* Compact Remaining Useful Life gauge */
+.aero-dashboard-grid .rul-gauge-panel {
+  padding: 20px 24px !important;
+}
+
+.aero-dashboard-grid .rul-gauge-panel svg {
+  max-width: 320px !important;
+  max-height: 190px !important;
+}
+
+.aero-dashboard-grid .rul-gauge-panel h2 {
+  font-size: 25px !important;
+}
+
+.aero-dashboard-grid .rul-gauge-panel .rul-gauge-value {
+  font-size: 56px !important;
+}
+
+.aero-dashboard-grid .rul-gauge-panel .rul-gauge-chart {
+  max-width: 350px !important;
+  margin: 0 auto !important;
+}
+
+
+/* Compact maintenance engine search */
+.maintenance-search-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.maintenance-search-header h2 {
+  margin-right: auto;
+}
+
+.maintenance-engine-search {
+  position: relative;
+  margin-left: auto;
+  width: 185px;
+  flex-shrink: 0;
+  z-index: 15;
+}
+
+.maintenance-engine-search input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d8e2ec;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #1b3853;
+  font-size: 12px;
+  outline: none;
+}
+
+.maintenance-engine-search input:focus {
+  border-color: #4d7eaa;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(77, 126, 170, .1);
+}
+
+.maintenance-search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 270px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #dce5ee;
+  border-radius: 9px;
+  box-shadow: 0 12px 30px rgba(20, 42, 64, .14);
+  padding: 5px;
+}
+
+.maintenance-search-results button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  padding: 11px 9px;
+  cursor: pointer;
+  text-align: left;
+  color: #243f59;
+}
+
+.maintenance-search-results button:hover {
+  background: #eef4f8;
+}
+
+.maintenance-search-results strong {
+  font-size: 12px;
+}
+
+.maintenance-search-results span,
+.maintenance-search-results small {
+  color: #71859a;
+  font-size: 10px;
+}
+
+@media (max-width: 600px) {
+  .maintenance-engine-search {
+    width: 145px;
+  }
+  .maintenance-search-results {
+    width: 230px;
+  }
+}
+
+
+/* Dataset engine dropdown — Maintenance Queue */
+.maintenance-engine-selector {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-left: auto;
+}
+
+.maintenance-engine-selector label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #74899e;
+}
+
+.maintenance-engine-selector select {
+  width: 185px;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d6e1eb;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #234560;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  outline: none;
+}
+
+.maintenance-engine-selector select:focus {
+  border-color: #4b80ae;
+  box-shadow: 0 0 0 3px rgba(75,128,174,.10);
+}
+
+@media (max-width: 600px) {
+  .maintenance-engine-selector label {
+    display: none;
+  }
+
+  .maintenance-engine-selector select {
+    width: 145px;
+  }
+}
+
+
+/* AEROMIND DESIGN SYSTEM V1 */
+.aeromind-app {
+  --am-text-primary: #192e46;
+  --am-text-secondary: #5e748a;
+  --am-text-muted: #8799ab;
+  --am-text-link: #2467a2;
+  --am-text-inverse: #f4f7fb;
+
+  --am-state-critical: #ba454b;
+  --am-state-warning: #ad742c;
+  --am-state-success: #237e69;
+
+  --am-font-xs: 12px;
+  --am-font-sm: 14px;
+  --am-font-md: 16px;
+  --am-font-lg: 20px;
+  --am-font-xl: 24px;
+  --am-font-2xl: 32px;
+
+  --am-radius-sm: 4px;
+  --am-radius-md: 8px;
+  --am-radius-lg: 16px;
+}
+
+/* Maintenance queue: constrained height and independent scrolling */
+.maintenance-panel {
+  min-height: 0;
+  align-self: start;
+}
+
+.maintenance-panel .maintenance-scroll {
+  height: 490px;
+  max-height: min(490px, 65vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #b9c8d6 #f1f5f8;
+  padding: 0 12px 12px;
+}
+
+.maintenance-group {
+  margin: 0 0 10px;
+}
+
+.maintenance-group-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  position: relative;
+  border: 0;
+  border-bottom: 1px solid #e5ebf1;
+  background: #f4f7fa;
+  color: var(--am-text-primary);
+  border-radius: var(--am-radius-md);
+  padding: 12px 13px;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--am-font-sm);
+}
+
+.maintenance-group-header strong {
+  font-size: var(--am-font-sm);
+  font-weight: 800;
+}
+
+.maintenance-group-header:hover {
+  background: #eaf0f5;
+}
+
+.maintenance-group-header > svg {
+  margin-left: auto;
+  color: var(--am-text-secondary);
+  transition: transform .18s ease;
+}
+
+.maintenance-group-header > svg.maintenance-group-expanded {
+  transform: rotate(90deg);
+}
+
+.maintenance-group-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.maintenance-group-indicator.critical {
+  background: var(--am-state-critical);
+}
+
+.maintenance-group-indicator.at_risk {
+  background: var(--am-state-warning);
+}
+
+.maintenance-group-count {
+  font-size: var(--am-font-xs);
+  color: var(--am-text-secondary);
+  font-weight: 600;
+}
+
+.maintenance-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 9px 0 2px;
+}
+
+.maintenance-group-items .maintenance-item {
+  min-height: 70px;
+  padding: 12px 13px;
+  margin: 0;
+  border-radius: var(--am-radius-md);
+}
+
+.maintenance-group-items .maintenance-item > strong {
+  font-size: var(--am-font-sm);
+}
+
+.maintenance-group-items .maintenance-rul {
+  font-size: var(--am-font-xs);
+}
+
+.maintenance-group-items .maintenance-rul b {
+  font-size: var(--am-font-sm);
+}
+
+/* Shared typography, color and radius rules for primary dashboard UI */
+.aero-panel,
+.sensor-workspace,
+.sensor-kpi {
+  border-radius: var(--am-radius-lg);
+  color: var(--am-text-primary);
+}
+
+.aero-panel .panel-title h2,
+.sensor-workspace-heading h3 {
+  font-size: var(--am-font-lg);
+  color: var(--am-text-primary);
+}
+
+.maintenance-engine-selector select,
+.sensor-engine-picker select,
+.maintenance-engine-search input {
+  font-size: var(--am-font-sm);
+  color: var(--am-text-primary);
+  border-radius: var(--am-radius-md);
+}
+
+.maintenance-tag,
+.sensor-priority-pill {
+  font-size: var(--am-font-xs);
+  border-radius: var(--am-radius-sm);
+}
+
+.sensor-page-header p,
+.sensor-workspace-heading p,
+.sensor-verification,
+.sensor-disclaimer {
+  font-size: var(--am-font-sm);
+  color: var(--am-text-secondary);
+}
+
+.sensor-page-header h2 {
+  font-size: var(--am-font-xl);
+  color: var(--am-text-primary);
+}
+
+.sensor-filter-group,
+.sensor-filter-group button,
+.sensor-detector,
+.sensor-engine-picker select {
+  border-radius: var(--am-radius-md);
+}
+
+@media (max-width: 700px) {
+  .maintenance-panel .maintenance-scroll {
+    height: 420px;
+    max-height: 55vh;
+  }
+}
+
+
+/* Maintenance Queue dropdown: final alignment correction */
+.maintenance-panel {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.maintenance-panel .maintenance-search-header {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 10px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.maintenance-panel .maintenance-search-header h2 {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin-right: 0 !important;
+  white-space: nowrap !important;
+}
+
+.maintenance-panel .maintenance-engine-selector {
+  flex: 0 1 155px !important;
+  width: 155px !important;
+  min-width: 115px !important;
+  max-width: 155px !important;
+  margin-left: auto !important;
+  gap: 0 !important;
+}
+
+.maintenance-panel .maintenance-engine-selector select {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 9px 24px 9px 10px !important;
+  font-size: 12px !important;
+  border-radius: 8px !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 1050px) {
+  .maintenance-panel .maintenance-search-header {
+    flex-wrap: wrap !important;
+  }
+
+  .maintenance-panel .maintenance-engine-selector {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+
+/* AEROMIND UNIFIED STATUS SYSTEM V1 */
+.aeromind-app {
+  --status-critical: #b93e47;
+  --status-critical-bg: #fbecef;
+  --status-critical-border: #f0cdd1;
+
+  --status-risk: #a66b18;
+  --status-risk-bg: #fff3e0;
+  --status-risk-border: #efd9b5;
+
+  --status-healthy: #217e66;
+  --status-healthy-bg: #e9f6f0;
+  --status-healthy-border: #c5e5d5;
+
+  --status-monitor: #527b99;
+  --status-monitor-bg: #eaf2f8;
+  --status-monitor-border: #d1e2ed;
+}
+
+/* Shared status badge geometry */
+.aeromind-app :is(
+  .maintenance-tag,
+  .sensor-priority-pill
+) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: fit-content;
+  min-width: 0;
+  padding: 5px 9px !important;
+  border-radius: 6px !important;
+  border: 1px solid transparent !important;
+  font-size: 12px !important;
+  font-weight: 750 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Critical status and P1 inspection priority */
+.aeromind-app :is(
+  .maintenance-tag.critical,
+  .sensor-priority-pill.p1
+) {
+  color: var(--status-critical) !important;
+  background: var(--status-critical-bg) !important;
+  border-color: var(--status-critical-border) !important;
+}
+
+/* At Risk status and P2 inspection priority */
+.aeromind-app :is(
+  .maintenance-tag.risk,
+  .sensor-priority-pill.p2
+) {
+  color: var(--status-risk) !important;
+  background: var(--status-risk-bg) !important;
+  border-color: var(--status-risk-border) !important;
+}
+
+/* P3 monitoring priority */
+.aeromind-app .sensor-priority-pill.p3 {
+  color: var(--status-monitor) !important;
+  background: var(--status-monitor-bg) !important;
+  border-color: var(--status-monitor-border) !important;
+}
+
+/* Maintenance group indicators */
+.aeromind-app .maintenance-group-indicator.critical {
+  background: var(--status-critical) !important;
+}
+
+.aeromind-app .maintenance-group-indicator.at_risk {
+  background: var(--status-risk) !important;
+}
+
+/* RUL gauge critical badge: match the same critical palette */
+.aeromind-app .rul-gauge-panel [class*="critical"] {
+  color: var(--status-critical);
+}
+
+/* Sensor evidence bars */
+.aeromind-app .sensor-p1 .sensor-score-track > div {
+  background: var(--status-critical) !important;
+}
+
+.aeromind-app .sensor-p2 .sensor-score-track > div {
+  background: var(--status-risk) !important;
+}
+
+.aeromind-app .sensor-p3 .sensor-score-track > div {
+  background: var(--status-monitor) !important;
+}

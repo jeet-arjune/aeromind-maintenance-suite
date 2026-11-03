@@ -1,0 +1,567 @@
+import EngineHero from './components/engine3d/EngineHero'
+import CriticalSensors from './CriticalSensors'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  Activity, AlertTriangle, Bell, CalendarDays, ChartNoAxesColumnIncreasing,
+  ChevronRight, CircleAlert, Cpu, House, Plane, Search,
+  ShieldCheck, Sparkles, TrendingUp, UsersRound, Wrench
+} from 'lucide-react'
+import {
+  Area, AreaChart, CartesianGrid, Cell, Line, LineChart,
+  Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis
+} from 'recharts'
+import EngineIntelligence from './EngineIntelligence'
+import EngineExplorer from './EngineExplorer'
+import RULGauge from './RULGauge'
+import TechnicianManagement from './TechnicianManagement'
+import WorkOrders from './WorkOrders'
+import TechnicianPortal from './TechnicianPortal'
+import './App.css'
+
+
+type Detector = {
+  score: number
+  threshold: number
+  anomaly: boolean
+  top_feature?: string
+}
+
+// AEROGUARD_V4_DATA_V1
+type FleetExport = {
+  unit_number: number
+  time_cycles: number
+  Stateful_Replayed_Priority: string
+  Predicted_RUL: number
+  Current_Detectors: number
+  Recalibrated_Rarity: number
+  Anomaly_Evidence: string
+  Top_Alert_Sensor?: string
+  Top_Sensor_Evidence?: string
+}
+
+type HistoryRow = {
+  unit_number: number
+  time_cycles: number
+  Predicted_RUL: number
+  Current_Detectors: number
+  Stateful_Replayed_Priority: string
+  Recalibrated_Rarity: number
+  Anomaly_Evidence: string
+}
+
+type Engine = {
+  engine_id: number
+  current_cycle: number
+  predicted_rul_cycles: number
+  maintenance_priority: string
+  priority_reason: string
+  anomaly_count: number
+  detectors: Record<string, Detector>
+  recalibrated_rarity?: number
+  anomaly_evidence?: string
+  top_alert_sensor?: string
+  top_sensor_evidence?: string
+
+}
+
+const navigation = [
+  { label: 'Dashboard', icon: House },
+  { label: 'Engine Explorer', icon: Cpu },
+  { label: 'Critical Sensors', icon: Activity },
+  { label: 'RUL Prediction', icon: Activity },
+  { label: 'Technicians', icon: UsersRound },
+  { label: 'Work Orders', icon: CalendarDays },
+  { label: 'Technician Portal', icon: Wrench },
+]
+
+function isCritical(e: Engine) {
+  return e.maintenance_priority === 'CRITICAL'
+}
+
+function isRisk(e: Engine) {
+  return e.maintenance_priority === 'UNDER OBSERVATION'
+}
+
+function engineCode(id: number) {
+  return `AC-${String(id).padStart(3, '0')}`
+}
+
+function parseHistory(csv: string): HistoryRow[] {
+  const lines = csv.trim().split(/\r?\n/)
+  const headers = lines.shift()?.split(',') ?? []
+
+  return lines.filter(Boolean).map(line => {
+    const values = line.split(',')
+    const row = Object.fromEntries(
+      headers.map((header, index) => [header.trim(), values[index]?.trim()])
+    )
+
+    return {
+      unit_number: Number(row.unit_number),
+      time_cycles: Number(row.time_cycles),
+      Predicted_RUL: Number(row.Predicted_RUL),
+      Current_Detectors: Number(row.Current_Detectors),
+      Stateful_Replayed_Priority: row.Stateful_Replayed_Priority,
+      Recalibrated_Rarity: Number(row.Recalibrated_Rarity),
+      Anomaly_Evidence: row.Anomaly_Evidence
+    }
+  })
+}
+
+function App() {
+  const [engines, setEngines] = useState<Engine[]>([])
+  const [history, setHistory] = useState<HistoryRow[]>([])
+  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [activeNav, setActiveNav] = useState('Dashboard')
+  const [staffToken, setStaffToken] = useState('')
+  const [search, setSearch] = useState('')
+  const [collapsedQueueGroups, setCollapsedQueueGroups] = useState<Record<string, boolean>>({})
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function load() {
+      try {
+        const [fleetResponse, historyResponse] = await Promise.all([
+          fetch('/data/fleet_overview.json'),
+          fetch('/data/engine_priority_history.csv')
+        ])
+
+        if (!fleetResponse.ok || !historyResponse.ok) {
+          throw new Error('V4 dashboard dataset unavailable')
+        }
+
+        const fleet: FleetExport[] = await fleetResponse.json()
+        const historical = parseHistory(await historyResponse.text())
+
+        const results: Engine[] = fleet.map(item => ({
+          engine_id: Number(item.unit_number),
+          current_cycle: Number(item.time_cycles),
+          predicted_rul_cycles: Number(item.Predicted_RUL),
+          maintenance_priority: item.Stateful_Replayed_Priority,
+          priority_reason: 'Stateful replayed investigation priority',
+          anomaly_count: Number(item.Current_Detectors),
+          detectors: {},
+          recalibrated_rarity: Number(item.Recalibrated_Rarity),
+          anomaly_evidence: item.Anomaly_Evidence,
+          top_alert_sensor: item.Top_Alert_Sensor,
+          top_sensor_evidence: item.Top_Sensor_Evidence
+        }))
+
+        if (!cancelled) {
+          setEngines(results)
+          setHistory(historical)
+          setSelectedId(
+              [...results]
+                .filter(engine => isCritical(engine) || isRisk(engine))
+                .sort((a, b) => {
+                  const priorityA = isCritical(a) ? 0 : 1
+                  const priorityB = isCritical(b) ? 0 : 1
+                  return priorityA - priorityB ||
+                    a.predicted_rul_cycles - b.predicted_rul_cycles
+                })[0]?.engine_id ?? results[0]?.engine_id ?? null
+            )
+          setError('')
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : 'Data loading failed')
+        }
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+
+    load()
+    return () => { cancelled = true }
+  }, [])
+
+  const healthy = engines.filter(e => e.maintenance_priority === 'HEALTHY').length
+  const risk = engines.filter(isRisk).length
+  const critical = engines.filter(isCritical).length
+  const total = engines.length
+  const healthyPercent = total ? Math.round(healthy / total * 100) : 0
+
+  const selected = engines.find(e => e.engine_id === selectedId)
+
+  const queue = useMemo(() =>
+    engines
+      .filter(e => isCritical(e) || isRisk(e))
+      .filter(e => engineCode(e.engine_id).toLowerCase().includes(search.toLowerCase()))
+      .sort((a, b) => {
+          const priorityA = isCritical(a) ? 0 : 1
+          const priorityB = isCritical(b) ? 0 : 1
+
+          if (priorityA !== priorityB) {
+            return priorityA - priorityB
+          }
+
+          return a.predicted_rul_cycles - b.predicted_rul_cycles
+        }),
+    [engines, search]
+  )
+
+  const fleetHealthData = [
+    { name: 'Healthy', value: healthy, color: '#248ef6' },
+    { name: 'At Risk', value: risk, color: '#ffab24' },
+    { name: 'Critical', value: critical, color: '#fa4047' }
+  ]
+
+  // Real historical GRU predictions from the exported V4 dataset.
+  const engineHistory = useMemo(() =>
+    history
+      .filter(row => row.unit_number === selectedId)
+      .sort((a, b) => a.time_cycles - b.time_cycles),
+    [history, selectedId]
+  )
+
+  const rulTrend = useMemo(() =>
+    engineHistory.map(row => ({
+      cycle: row.time_cycles,
+      estimated: row.Predicted_RUL
+    })),
+    [engineHistory]
+  )
+
+
+
+  return (
+    <div className="aeromind-app">
+      <aside className="aero-sidebar">
+        <div className="aero-logo">
+          <div className="logo-symbol">A</div>
+          <div>
+            <strong>AeroMind</strong>
+            <small>Aircraft PHM Suite</small>
+          </div>
+        </div>
+
+        
+        <nav className="aero-nav">
+          {navigation.map(({ label, icon: Icon }) => (
+            <button
+              key={label}
+              className={`aero-nav-item ${activeNav === label ? 'active' : ''}`}
+              onClick={() => setActiveNav(label)}
+            >
+              <Icon size={21} strokeWidth={2.2} />
+              <span>{label}</span>
+            </button>
+          ))}
+        </nav>
+
+        
+        {/* AEROMIND_STEP_157_SIDEBAR_FLEET */}
+        {activeNav === 'Dashboard' && (
+          <div className="sidebar-fleet-snapshot">
+            <div className="sidebar-fleet-heading">FLEET OVERVIEW</div>
+            <div className="sidebar-fleet-row">
+              <span><i className="fleet-dot total" />Total Aircraft</span>
+              <strong>{total}</strong>
+            </div>
+            <div className="sidebar-fleet-row">
+              <span><i className="fleet-dot healthy" />Healthy</span>
+              <strong>{healthy}</strong>
+            </div>
+            <div className="sidebar-fleet-row">
+              <span><i className="fleet-dot risk" />At Risk</span>
+              <strong>{risk}</strong>
+            </div>
+            <div className="sidebar-fleet-row">
+              <span><i className="fleet-dot critical" />Critical</span>
+              <strong>{critical}</strong>
+            </div>
+            <div className="sidebar-fleet-caption">
+              Simulated fleet snapshot
+            </div>
+          </div>
+        )}
+
+        <div className="sidebar-aviation-art">
+          <div className="tower-shape" />
+          <Plane size={55} strokeWidth={1.3} />
+          <div className="sidebar-hill hill-one" />
+          <div className="sidebar-hill hill-two" />
+          <div className="sidebar-hill hill-three" />
+        </div>
+      </aside>
+
+      <main className="aero-main">
+        <header className="aero-header">
+          <div className="header-copy">
+            <div className="header-kicker"><span /> Predict · Prevent · Keep Flying</div>
+            <h1>Aircraft Predictive Maintenance</h1>
+            <p>AI-powered RUL prediction and health monitoring for a safer, more reliable fleet.</p>
+          </div>
+          <div className="header-plane"><Plane size={67} fill="#1685d9" strokeWidth={1} /></div>
+          <div className="header-controls">
+            <label className="search-box">
+              <Search size={19} />
+              <input
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search engine / flight / fleet..."
+              />
+            </label>
+            <button className="round-icon" title="Notifications">
+              <Bell size={22} /><span className="notification-dot" />
+            </button>
+            <div className="user-avatar">J</div>
+          </div>
+        </header>
+
+        <div className="aero-content">
+          {error && <div className="api-error"><CircleAlert size={18} /> {error}. Check the exported V4 files in frontend/public/data.</div>}
+
+          <section className="summary-grid" style={{ display: (activeNav === 'Technicians' || activeNav === 'Work Orders' || activeNav === 'Technician Portal') ? 'none' : undefined }}>
+            <div className="summary-card total-card">
+              <div className="summary-icon"><Plane size={35} /></div>
+              <div>
+                <h3>Total Aircraft</h3>
+                <strong>{total}</strong>
+                <p><TrendingUp size={16} /> Connected test engines</p>
+              </div>
+            </div>
+            <div className="summary-card healthy-card">
+              <div className="summary-icon"><Activity size={35} /></div>
+              <div>
+                <h3>Healthy</h3>
+                <strong>{healthy}</strong>
+                <p>{healthyPercent}% of monitored fleet</p>
+              </div>
+            </div>
+            <div className="summary-card risk-card">
+              <div className="summary-icon"><AlertTriangle size={35} /></div>
+              <div>
+                <h3>At Risk</h3>
+                <strong>{risk}</strong>
+                <p>{total ? Math.round(risk / total * 100) : 0}% of monitored fleet</p>
+              </div>
+            </div>
+            <div className="summary-card critical-card">
+              <div className="summary-icon"><CircleAlert size={35} /></div>
+              <div>
+                <h3>Critical</h3>
+                <strong>{critical}</strong>
+                <p>{total ? Math.round(critical / total * 100) : 0}% of monitored fleet</p>
+              </div>
+            </div>
+          </section>
+
+          {/* ENGINE_INTELLIGENCE_CONNECTED_V1 */}
+            {activeNav === 'Engine Explorer' && (
+              <EngineExplorer
+                selectedId={selectedId}
+                onSelect={setSelectedId}
+              />
+            )}
+            {activeNav === 'Critical Sensors' && <CriticalSensors />}
+            {activeNav === 'Technicians' && <TechnicianManagement token={staffToken} setToken={setStaffToken} />}
+            {activeNav === 'Work Orders' && <WorkOrders token={staffToken} setToken={setStaffToken} engines={engines} />}
+            {activeNav === 'Technician Portal' && <TechnicianPortal token={staffToken} setToken={setStaffToken} onOpenWorkOrders={() => setActiveNav('Work Orders')} />}
+    {activeNav === 'RUL Prediction' && (
+              <EngineIntelligence
+                engines={engines}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
+                history={history}
+              />
+            )}
+
+            {activeNav === 'Dashboard' && <EngineHero onExplore={() => setActiveNav('Engine Explorer')} />}
+            <section
+              className="aero-dashboard-grid"
+              style={{ display: (activeNav === 'RUL Prediction' || activeNav === 'Critical Sensors' || activeNav === 'Engine Explorer' || activeNav === 'Technicians' || activeNav === 'Work Orders' || activeNav === 'Technician Portal') ? 'none' : undefined }}
+            >
+            {/* AEROMIND_LIVE_RUL_GAUGE_V1 */}
+              {selected && (
+                <RULGauge
+                  rul={selected.predicted_rul_cycles}
+                  engineId={selected.engine_id}
+                  priority={selected.maintenance_priority}
+                />
+              )}
+              <div className="aero-panel rul-panel">
+              <div className="panel-title"><span className="panel-icon"><Cpu size={23} /></span><h2>RUL Prediction Overview</h2></div>
+              <div className="chart-headline">
+                <span>Selected engine: <b>{selected ? engineCode(selected.engine_id) : '—'}</b></span>
+                <span>Current RUL <b>{selected ? selected.predicted_rul_cycles.toFixed(1) : '—'} cycles</b></span>
+              </div>
+              <div className="rul-chart">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={rulTrend} margin={{ top: 16, right: 18, left: 2, bottom: 10 }}>
+                    <CartesianGrid stroke="#e8eef9" strokeDasharray="3 3" />
+                    <XAxis dataKey="cycle" tick={{ fontSize: 11, fill: '#334361' }} />
+                    <YAxis tick={{ fontSize: 11, fill: '#334361' }} domain={[0, 'auto']} />
+                    <Tooltip />
+                    <Line
+                  type="linear"
+                  dataKey="estimated"
+                  name="Historical GRU predictions"
+                  stroke="#0057D9"
+                  strokeWidth={3}
+                  dot={false}
+                  activeDot={{ r: 5, fill: '#0057D9', stroke: '#ffffff', strokeWidth: 2 }}
+                  isAnimationActive={false}
+                />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="chart-legend"><span className="legend-blue" /> Historical GRU predictions <span className="legend-note">NASA FD001 · Exported model inference</span></div>
+            </div>
+
+            <div className="aero-panel fleet-health-panel">
+              <div className="panel-title"><span className="panel-icon"><Plane size={23} /></span><h2>Fleet Health</h2></div>
+              <div className="donut-layout">
+                <div className="donut-chart">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie data={fleetHealthData} dataKey="value" cx="50%" cy="50%" innerRadius="72%" outerRadius="94%" startAngle={90} endAngle={-270} stroke="none">
+                        {fleetHealthData.map(item => <Cell key={item.name} fill={item.color} />)}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="donut-center"><strong>{healthyPercent}%</strong><span>Healthy</span></div>
+                </div>
+                <div className="health-legend">
+                  {fleetHealthData.map(item => (
+                    <div key={item.name}><span className="legend-dot" style={{ background: item.color }} /><span>{item.name}</span><b>{item.value}</b></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="aero-panel maintenance-panel">
+              <div className="panel-title maintenance-search-header">
+                  <span className="panel-icon"><CalendarDays size={23} /></span>
+                  <h2>Maintenance Queue</h2>
+                  <div className="maintenance-engine-selector">
+                    
+                    <select
+                      id="maintenance-engine-select"
+                      value={selectedId ?? ''}
+                      onChange={event => {
+                        const id = Number(event.target.value)
+                        if (!id) return
+                        setSelectedId(id)
+                        setActiveNav('RUL Prediction')
+                      }}
+                    >
+                      <option value="" disabled>Select engine</option>
+                      {[...engines]
+                        .sort((a, b) => a.engine_id - b.engine_id)
+                        .map(engine => (
+                          <option key={engine.engine_id} value={engine.engine_id}>
+                            {engineCode(engine.engine_id)} — {isCritical(engine) ? 'Critical' : isRisk(engine) ? 'At Risk' : 'Healthy'}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="maintenance-list maintenance-scroll">
+                  {(['CRITICAL', 'AT_RISK'] as const).map(status => {
+                    const group = queue.filter(engine =>
+                      status === 'CRITICAL' ? isCritical(engine) : isRisk(engine)
+                    )
+                    const collapsed = Boolean(collapsedQueueGroups[status])
+
+                    return (
+                      <section className="maintenance-group" key={status}>
+                        <button
+                          type="button"
+                          className="maintenance-group-header"
+                          onClick={() => setCollapsedQueueGroups(previous => ({
+                            ...previous,
+                            [status]: !previous[status]
+                          }))}
+                          aria-expanded={!collapsed}
+                        >
+                          <span className={`maintenance-group-indicator ${status.toLowerCase()}`} />
+                          <strong>{status === 'CRITICAL' ? 'Critical' : 'At Risk'}</strong>
+                          <span className="maintenance-group-count">{group.length} engines</span>
+                          <ChevronRight
+                            size={16}
+                            className={collapsed ? '' : 'maintenance-group-expanded'}
+                          />
+                        </button>
+
+                        {!collapsed && (
+                          <div className="maintenance-group-items">
+                            {group.map(engine => (
+                              <button
+                                key={engine.engine_id}
+                                className={`maintenance-item ${selectedId === engine.engine_id ? 'selected' : ''}`}
+                                onClick={() => {
+                                  setSelectedId(engine.engine_id)
+                                  setActiveNav('RUL Prediction')
+                                }}
+                              >
+                                <strong>{engineCode(engine.engine_id)}</strong>
+                                <span className={`maintenance-tag ${isCritical(engine) ? 'critical' : 'risk'}`}>
+                                  {isCritical(engine) ? 'Critical' : 'At Risk'}
+                                </span>
+                                <span className="maintenance-rul">
+                                  RUL <b>{engine.predicted_rul_cycles.toFixed(1)} cycles</b>
+                                </span>
+                                <ChevronRight size={18} />
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </section>
+                    )
+                  })}
+                  {!loading && queue.length === 0 && (
+                    <p className="empty-queue">No flagged engines in this view.</p>
+                  )}
+                  {loading && (
+                    <p className="empty-queue">Analyzing engines...</p>
+                  )}
+                </div>
+            </div>
+
+            <div className="aero-panel insights-panel">
+              <div className="panel-title"><span className="panel-icon"><Sparkles size={23} /></span><h2>AI Insights</h2><ChevronRight size={18} className="panel-chevron" /></div>
+              <div className="insight-feature">
+                <div className="insight-chip"><Cpu size={25} /></div>
+                <div>
+                  <p><b>{healthyPercent}%</b> of monitored engines are classified healthy.</p>
+                  <strong>{critical} engine{critical === 1 ? '' : 's'} require{critical === 1 ? 's' : ''} critical-priority investigation.</strong>
+                </div>
+              </div>
+              <div className="insight-mini-grid">
+                <div><TrendingUp size={23} /><span>Lowest predicted RUL <b>{engines.length ? Math.min(...engines.map(e => e.predicted_rul_cycles)).toFixed(1) : '—'} cycles</b></span></div>
+                <div><ShieldCheck size={23} /><span><b>{selected?.anomaly_count ?? 0} / 4</b> anomaly signals for selected engine</span></div>
+                <div><CalendarDays size={23} /><span>Recommended checks for <b>{critical + risk} flagged engines</b></span></div>
+              </div>
+            </div>
+
+            <div className="aero-panel trend-panel">
+              <div className="panel-title"><span className="panel-icon"><ChartNoAxesColumnIncreasing size={23} /></span><h2>Fleet Health Breakdown</h2></div>
+              <div className="breakdown-chart">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={[{ label: 'Current', healthy, risk, critical }]} margin={{ top: 12, right: 20, left: 0, bottom: 4 }}>
+                    <CartesianGrid stroke="#e7eef8" />
+                    <XAxis dataKey="label" tick={{ fontSize: 11 }} />
+                    <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="critical" stackId="1" stroke="#fa4047" fill="#fa4047" />
+                    <Area type="monotone" dataKey="risk" stackId="1" stroke="#ffab24" fill="#ffab24" />
+                    <Area type="monotone" dataKey="healthy" stackId="1" stroke="#248ef6" fill="#55a9f7" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="trend-legend"><span>🔵 Healthy</span><span>🟠 At Risk</span><span>🔴 Critical</span></div>
+              <p className="trend-disclaimer">Current fleet snapshot · Historical trend data not yet collected</p>
+            </div>
+          </section>
+          <footer className="aero-footer">NASA C-MAPSS FD001 · AeroGuard V4 inference backend · Research prototype, not aviation-certified</footer>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+export default App
