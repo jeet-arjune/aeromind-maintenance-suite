@@ -1,4 +1,4 @@
-import sys
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -6,20 +6,25 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "ml" / "pipeline"))
-
-from health_assessment import assess_engine
-
 app = FastAPI(
-    title="AeroGuard AI V4 API",
+    title="AeroMind Demo API",
     description="Aircraft engine predictive maintenance prototype",
     version="4.0.0",
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173",
-                   "http://127.0.0.1:3000", "http://127.0.0.1:5173"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        *[
+            origin.strip().rstrip("/")
+            for origin in os.getenv("FRONTEND_URL", "").split(",")
+            if origin.strip()
+        ],
+    ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type"],
@@ -51,24 +56,8 @@ def list_engines():
 
 @app.get("/api/engines/{engine_id}/health")
 def engine_health(engine_id: int):
-    if engine_id < 1:
-        raise HTTPException(status_code=400, detail="Invalid engine ID")
-
-    path = DATA_DIR / f"engine_{engine_id}.csv"
-
-    if not path.is_file():
-        raise HTTPException(
-            status_code=404,
-            detail=f"Engine {engine_id} data not found",
-        )
-
-    try:
-        history = pd.read_csv(path)
-        result = assess_engine(history)
-    except (ValueError, KeyError, TypeError) as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
-
-    return {"engine_id": engine_id, **result}
+    """Use precomputed NASA C-MAPSS predictions in demo mode."""
+    return cached_engine_analysis(engine_id)
 
 
 # Cached fleet analysis — precomputed GRU + anomaly detector results

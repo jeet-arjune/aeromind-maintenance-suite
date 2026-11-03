@@ -6,7 +6,9 @@ import {
 } from 'lucide-react'
 import './TechnicianPortal.css'
 
-const API = 'http://127.0.0.1:8000'
+const API = (
+  import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+).replace(/\/$/, '')
 
 type Status = 'assigned' | 'in_progress' | 'on_hold' |
   'pending_review' | 'completed' | 'cancelled' | 'open'
