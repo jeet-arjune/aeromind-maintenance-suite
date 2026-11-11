@@ -1,32 +1,38 @@
-# React + TypeScript + Vite
+# AeroMind frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The React and TypeScript web client for the [AeroMind Maintenance Suite](../README.md).
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+From this directory:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm ci
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Create a `.env.local` file:
+
+```dotenv
+VITE_API_URL=http://127.0.0.1:8000
+```
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Create a production build with:
+
+```bash
+npm run build
+```
+
+The API base URL is configured through `VITE_API_URL`. The deployed Render Static Site uses the public FastAPI service URL. See the root README for architecture, demo limitations, data notes, and deployment configuration.
+
+## Preview
+
+- [Open the live AeroMind demo](https://aeromind-maintenance-suite.onrender.com/)
+- [Open the API documentation](https://aeromind-koqx.onrender.com/docs)
+
+The live dashboard uses cached predictions for simulated NASA C-MAPSS data. It is a hackathon prototype and does not perform live aircraft monitoring.
